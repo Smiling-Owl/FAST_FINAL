@@ -30,8 +30,7 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Popular Subject Requests - FAST Admin</title>
-    <link rel="icon" type="image/x-icon" href="../images/FAST logo white trans.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="../images/icon.png">
     <link rel="stylesheet" href="styles/popular_request.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,7 +40,7 @@ $result = $conn->query($sql);
     <header>
         <div class="navigation-bar">
             <div id="navigation-container">
-            <img src="../images/FAST Logo Trans.png" alt="FAST Logo">
+            <img src="../images/icon.png" alt="FAST Logo">
                 <ul>
                     <li><a href="admin_dashboard.php">ADMIN DASHBOARD</a></li>
                     <li><a href="popular_requests.php">POPULAR REQUESTS</a></li>
@@ -91,10 +90,10 @@ $result = $conn->query($sql);
     </div>
 
     <div class="carousel-image">
-        <img src="../Main-images/carousel_1.jpg" alt="Hero Image 1" class="carousel-slide">
-        <img src="../Main-images/carousel_2.jpg" alt="Hero Image 2" class="carousel-slide">
-        <img src="../Main-images/carousel_3.jpg" alt="Hero Image 3" class="carousel-slide">
-        <img src="../Main-images/carousel_4.jpg" alt="Hero Image 4" class="carousel-slide">
+        <img src="../images/carousel_1.jpg" alt="Hero Image 1" class="carousel-slide">
+        <img src="../images/carousel_2.jpg" alt="Hero Image 2" class="carousel-slide">
+        <img src="../images/carousel_3.jpg" alt="Hero Image 3" class="carousel-slide">
+        <img src="../images/carousel_4.jpg" alt="Hero Image 4" class="carousel-slide">
     </div>
     <div class="carousel-overlay"></div>
 
@@ -104,7 +103,7 @@ $result = $conn->query($sql);
         </div>
     </footer>
 
-    <script src="JS_admin.js"></script>
+    <script src="../index.js"></script>
 </body>
 </html>
 
