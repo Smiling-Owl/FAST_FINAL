@@ -1,39 +1,26 @@
 <?php
 session_start();
 
+// Check if the admin is logged in
 if (!isset($_SESSION['admin_id'])) {
     header("Location: admin_login.php");
     exit();
 }
 
+// Database connection
 $conn = new mysqli("localhost", "root", "", "fastdb");
+
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch tutors for the dropdown
-$sql_tutors = "SELECT t.id AS tutor_id, ta.fullname AS tutor_fullname FROM tutors t INNER JOIN tutor_application ta ON t.user_id = ta.user_id";
-$result_tutors = $conn->query($sql_tutors);
+// Query to count the occurrences of each requested subject
+$sql = "SELECT subject, COUNT(*) AS request_count
+        FROM tutoring_requests
+        GROUP BY subject
+        ORDER BY request_count DESC";
 
-// Fetch class details if editing
-if (isset($_GET['class_id'])) {
-    $class_id_edit = $_GET['class_id'];
-    $sql_class = "SELECT * FROM classes WHERE class_id = ?";
-    $stmt_class = $conn->prepare($sql_class);
-    $stmt_class->bind_param("i", $class_id_edit);
-    $stmt_class->execute();
-    $result_class = $stmt_class->get_result();
-    if ($result_class->num_rows === 1) {
-        $class_data = $result_class->fetch_assoc();
-    } else {
-        echo "Class not found.";
-        exit();
-    }
-    $stmt_class->close();
-} else {
-    echo "No class ID specified.";
-    exit();
-}
+$result = $conn->query($sql);
 
 ?>
 

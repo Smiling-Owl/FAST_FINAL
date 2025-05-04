@@ -1,3 +1,29 @@
+<?php
+session_start();
+
+// Check if the admin is logged in
+if (!isset($_SESSION['admin_id'])) {
+    header("Location: admin_login.php");
+    exit();
+}
+
+// Database connection
+$conn = new mysqli("localhost", "root", "", "fastdb");
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Query to count the occurrences of each requested subject
+$sql = "SELECT subject, COUNT(*) AS request_count
+        FROM tutoring_requests
+        GROUP BY subject
+        ORDER BY request_count DESC";
+
+$result = $conn->query($sql);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +76,7 @@
     <header>
         <div class="navigation-bar">
             <div id="navigation-container">
-                <img src="../images/FAST Logo Trans.png" alt="FAST Logo">
+            <img src="../images/FAST Logo Trans.png" alt="FAST Logo">
                 <ul>
                 <li><a href="admin_dashboard.php" aria-label="Admin Dashboard">ADMIN DASHBOARD</a></li>
                     <li><a href="popular_requests.php" aria-label="Popular Requests">POPULAR REQUESTS</a></li>

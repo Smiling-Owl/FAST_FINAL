@@ -14,32 +14,24 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch pending student applications with student username
-$sql_applications = "SELECT sa.id AS application_id,
-                             sa.fullname,
-                             sa.student_id,
-                             sa.email,
-                             sa.application_date,
-                             sa.status,
-                             u.username AS student_username
-                     FROM student_application sa
-                     INNER JOIN users u ON sa.user_id = u.id
-                     WHERE sa.status = 'pending'";
-$result_applications = $conn->query($sql_applications);
+// Query to count the occurrences of each requested subject
+$sql = "SELECT subject, COUNT(*) AS request_count
+        FROM tutoring_requests
+        GROUP BY subject
+        ORDER BY request_count DESC";
 
-if ($result_applications === false) {
-    echo "Error executing query: " . $conn->error;
-    die();
-}
-
+$result = $conn->query($sql);
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Student Applications - FAST Admin</title>
+    <link rel="icon" type="image/x-icon" href="../images/FAST logo white trans.png">
+    <link rel="icon" type="image/x-icon" href="../images/FAST logo white trans.png">
     <link rel="icon" type="image/x-icon" href="/Main-images/FAST logo white trans.png">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,14 +40,12 @@ if ($result_applications === false) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="../images/FAST logo white trans.png">
     <link rel="stylesheet" href="styles/manage_applications.css">
     <script>
         function processApplication(applicationId, action) {
@@ -88,7 +78,7 @@ if ($result_applications === false) {
         <div class = "page-wrapper">
             <div class="navigation-bar">
                 <div id="navigation-container">
-                    <img src="../images/FAST Logo Trans.png" alt="FAST Logo">
+                <img src="../images/FAST Logo Trans.png" alt="FAST Logo">
                     <ul>
                         <li><a href="admin_dashboard.php" aria-label="Admin Dashboard">ADMIN DASHBOARD</a></li>
                         <li><a href="popular_requests.php" aria-label="Popular Requests">POPULAR REQUESTS</a></li>
