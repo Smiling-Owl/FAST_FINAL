@@ -41,13 +41,14 @@ body, html {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  padding: 20px;
+  padding: 15px;
   z-index: 1;
   position: relative;
 }
 .registration-container {
   background-color: #FFF5E3;
-  padding: 30px;
+  padding: 15px;
+  margin-top: 5rem;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
   width: 100%;

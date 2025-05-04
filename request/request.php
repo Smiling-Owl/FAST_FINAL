@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Foundation of Ateneo Student Tutors</title>
   <link rel="icon" type="image/x-icon" href="../images/FAST logo white trans.png">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="request_style.css">
   <link rel="icon" type="image/x-icon" href="/Main-images/FAST logo white trans.png">
     <link rel="stylesheet" href="styles.css">
@@ -63,6 +63,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 }
 ?>
+
+
+
+<header>
+        <div class="navigation-bar">
+            <div id="navigation-container">
+                <img src="../images/icon.png" alt="FAST Logo">
+                <ul>
+                    <li><a href="#about" aria-label="About FAST">ABOUT</a></li>
+                    <li><a href="../request/request.php" aria-label="Request Tutoring">REQUEST</a></li>
+                    <li>
+                        <div class="dropdown">
+                            <button class="DropApplication"><a>APPLY NOW!</a>
+                                <i class="down"></i>
+                            </button>
+                            <div class="Dropdown_Application">
+                                <a href="../application/apply_student.php" target="_blank" aria-label="Student Application">STUDENT</a>
+                                <a href="../application/tutor_app.php" target="_blank"
+                                   aria-label="Tutor Application (opens in a new tab)">TUTORS</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="../logout.php">LOG OUT</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
 
 <div class="request-form">
   <div class="form-wrapper">
