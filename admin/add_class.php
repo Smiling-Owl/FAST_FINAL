@@ -32,19 +32,22 @@ $result_tutors = $conn->query($sql_tutors);
     <title>Add New Class - FAST Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/FAST logo white trans.png">
     <link rel="stylesheet" href="styles/add_class_style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Lora:wght@400;700&family=Oswald:wght@400;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
+<header>
         <div class="navigation-bar">
             <div id="navigation-container">
-                <img src="../images/FAST Logo Trans.png" alt="FAST Logo">
+            <img src="../images/icon.png" alt="FAST Logo">
                 <ul>
-                    <li><a href="admin_dashboard.php" aria-label="Admin Dashboard">ADMIN DASHBOARD</a></li>
-                    <li><a href="popular_requests.php" aria-label="Popular Requests">POPULAR REQUESTS</a></li>
-                    <li><a href="manage_applications.php" aria-label="Manage Applications">MANAGE APPLICATIONS</a></li>
-                    <li><a href="manage_tutor_applications.php" aria-label="Manage Tutor Applications">MANAGE TUTOR APPLICATIONS</a></li>
-                    <li><a href="manage_classes.php" aria-label="Manage Classes">MANAGE CLASSES</a></li>
-                    <li><a href="admin_logout.php">LOG OUT</a></li>
+                    <li><a href="admin_dashboard.php">ADMIN DASHBOARD</a></li>
+                    <li><a href="popular_requests.php">POPULAR REQUESTS</a></li>
+                    <li><a href="manage_applications.php">MANAGE APPLICATIONS</a></li>
+                    <li><a href="manage_tutor_applications.php">MANAGE TUTOR APPLICATIONS</a></li>
+                    <li><a href="manage_classes.php">MANAGE CLASSES</a></li>
+                    <li><a href="logout.php">LOG OUT</a></li>
                 </ul>
             </div>
         </div>
@@ -144,12 +147,21 @@ $result_tutors = $conn->query($sql_tutors);
         </div>
     </div>
 
+    <div class="carousel-image">
+        <img src="../images/carousel_1.jpg" alt="Hero Image 1" class="carousel-slide">
+        <img src="../images/carousel_2.jpg" alt="Hero Image 2" class="carousel-slide">
+        <img src="../images/carousel_3.jpg" alt="Hero Image 3" class="carousel-slide">
+        <img src="../images/carousel_4.jpg" alt="Hero Image 4" class="carousel-slide">
+    </div>
+    <div class="carousel-overlay"></div>
+
     <footer>
         <div class="footer-content">
             <p>&copy; <?php echo date("Y"); ?> Foundation of Ateneo Student Tutors - Admin Area</p>
         </div>
     </footer>
 
+    <script src="../index.js"></script>
 </body>
 </html>
 
