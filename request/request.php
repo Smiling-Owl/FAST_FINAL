@@ -6,6 +6,21 @@
   <link rel="icon" type="image/x-icon" href="../images/FAST logo white trans.png">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="request_style.css">
+  <link rel="icon" type="image/x-icon" href="/Main-images/FAST logo white trans.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -56,28 +71,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <form method="POST" action="">
 
         <div class="form-group">
-          <label for="course">Course</label><br>
-          <input type="text" id="course" name="course" required><br>
+          <label for="course">Course</label>
+          <input type="text" id="course" name="course" required placeholder="Major"><br>
         </div>
 
         <div class="form-group">
-          <label for="subject">Subject</label><br>
-          <input type="text" id="subject" name="subject" required><br>
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" name="subject" required placeholder="Feild" ><br>
         </div>
 
         <div class="form-group">
-          <label for="topic">Topic</label><br>
-          <input type="text" id="topic" name="topic" required><br>
+          <label for="topic">Topic</label>
+          <input type="text" id="topic" name="topic" required placeholder="Topics to focus on"><br>
         </div>
 
         <div class="form-group">
-          <label for="freetime">Schedule Tutoring Time</label><br>
-          <input type="text" id="freetime" name="freetime" required><br>
+          <label for="freetime">Schedule Tutoring Time</label>
+          <input type="text" id="freetime" name="freetime" required placeholder="DD/MM/YR-AM/PM"><br>
         </div>
 
         <div class="form-group">
-          <label for="reason">What would you like help with?</label><br>
-          <textarea id="reason" name="reason" rows="4" required></textarea><br>
+          <label for="reason">What would you like help with?</label>
+          <textarea id="reason" name="reason" rows="4" required placeholder="Describe where you need help with"></textarea><br>
         </div>
 
         <button type="submit" class="submit-btn">Submit</button><br>
