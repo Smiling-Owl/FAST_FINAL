@@ -5,7 +5,7 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Ensure body takes at least full height */
+    min-height: 100vh;
 }
 
 .navigation-bar {
@@ -24,7 +24,7 @@ body {
 }
 
 .navigation-bar img {
-    height: 60px
+    height: 60px;
 }
 
 #navigation-container {
@@ -41,6 +41,8 @@ body {
     margin: 0;
     list-style-type: none;
     flex-wrap: wrap;
+    justify-content: flex-end; /* Align items to the end (right) */
+    align-items: center; /* Vertically center items if needed */
 }
 
 .navigation-bar li {
@@ -60,6 +62,7 @@ body {
     line-height: 70px;
     padding: 5px 20px;
     opacity: 0.6;
+    display: block; /* Make the whole li area clickable */
 }
 
 .navigation-bar li a:hover {
@@ -67,35 +70,31 @@ body {
     font-size: 16px;
 }
 
-
 /* Carousel Styling */
 .carousel-image {
-    position: fixed; /* Fixed position for the carousel */
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%; /* Full width of the container */
-    height: 100vh; /* Full height of the viewport */
-    overflow: hidden; /* Hide images that are not in view */
-    z-index: -2; /* Ensure carousel is behind the navbar */
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -2;
     opacity: 0.9;
 }
 
-/* Initially hide all images */
 .carousel-slide {
     position: absolute;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensure images cover the container without distortion */
+    object-fit: cover;
     opacity: 0;
     transition: opacity 1s ease-in-out;
 }
 
-/* Show active image */
 .carousel-slide.active {
     opacity: 1;
 }
 
-/* Overlay for the carousel */
 .carousel-overlay {
     position: fixed;
     top: 0;
@@ -109,7 +108,7 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: center;
     justify-content: flex-start;
     padding: 40px 20px;
     margin-top: 100px;
@@ -160,20 +159,21 @@ h1 {
     gap: 10px;
     justify-content: space-between;
 }
+
 footer {
     background-color: #221f17;
     color: #f4f4f4;
     text-align: center;
     padding: 2rem 0;
     margin-top: 40px;
-  }
-  
-  .footer-content {
+}
+
+.footer-content {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
     font-size: 0.9rem;
-  }
+}
 
 .table-container {
     overflow-x: auto;
@@ -192,7 +192,8 @@ table {
     table-layout: auto;
 }
 
-th, td {
+th,
+td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -211,7 +212,6 @@ tr:hover {
     background-color: #f9f9f9;
 }
 
-/* Button styles */
 button {
     padding: 8px 15px;
     border: none;
@@ -221,7 +221,6 @@ button {
     transition: background-color 0.3s ease;
 }
 
-/* Approve button */
 .approve-button {
     background-color: #a72828;
     color: rgb(255, 16, 16);
@@ -231,7 +230,6 @@ button {
     background-color: #ff0000;
 }
 
-/* Reject button */
 .reject-button {
     background-color: #dc3545;
     color: rgb(255, 0, 0);
@@ -248,7 +246,7 @@ button:hover {
 button:focus {
     outline: none;
 }
- 
+
 td[colspan="8"] {
     text-align: center;
     font-size: 1.2rem;
@@ -284,5 +282,13 @@ footer {
     table {
         width: 100%;
         table-layout: fixed;
+    }
+
+    .navigation-bar ul {
+        justify-content: center; /* Center nav items on small screens */
+    }
+
+    .navigation-bar li {
+        margin: 5px; /* Add a little more margin on small screens */
     }
 }
