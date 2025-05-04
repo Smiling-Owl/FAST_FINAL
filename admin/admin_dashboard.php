@@ -85,7 +85,7 @@ $conn->close();
             <li><a href="manage_applications.php">MANAGE APPLICATIONS</a></li>
             <li><a href="manage_tutor_applications.php">MANAGE TUTOR APPLICATIONS</a></li>
             <li><a href="manage_classes.php">MANAGE CLASSES</a></li>
-            <li><a href="logout.php">LOG OUT</a></li>
+            <li><a href="admin_logout.php">LOG OUT</a></li>
           </ul>
         </div>
       </div>

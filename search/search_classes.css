@@ -1,157 +1,65 @@
-/*Font link for montserrat*/
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-
-/* Ensure the body has proper spacing for fixed navbar */
-body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    padding-top: 90px; /* Account for navbar height (70px) + padding */
-    background-color: #FFF5E3;
-    font-family: 'PT Sans', sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-/* Container for dashboard content */
 .container {
-    max-width: 1400px;
-    width: 90%;
-    margin: 30px auto;
-    padding: 30px;
-    background-color: #f8f1e4;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    font-family: 'PT Sans', sans-serif;
-    flex: 1; /* Allow container to grow and push footer down */
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
-/* Page title styling */
-h1 {
-    color: #7e461e;
-    font-family: 'Oswald', sans-serif;
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-/* Section subtitle */
-h2 {
-    color: #7e461e;
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.8rem;
+.search-bar {
     margin-bottom: 20px;
 }
 
-/* Search bar styling */
-#searchBar {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 25px;
-    border: 2px solid #895129;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-family: 'PT Sans', sans-serif;
-    background-color: #fff;
+.search-bar input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 70%;
 }
 
-#searchBar:focus {
-    border-color: #7e461e;
-    box-shadow: 0 0 5px rgba(126, 70, 30, 0.5);
-    outline: none;
+.search-bar button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
 }
 
-/* Class list styling */
-#classes-list {
+.classes-list ul {
     list-style: none;
     padding: 0;
-    margin: 0;
 }
 
-/* Class item cards */
-.class-item {
-    background-color: rgba(195, 126, 70, 0.85);
-    padding: 25px;
-    border-radius: 10px;
-    margin-bottom: 25px;
-    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-    color: #F4F4F4;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+.classes-list li {
+    border: 1px solid #eee;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: white;
 }
 
-.class-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
-}
-
-/* Class name styling */
-.class-item h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
+.classes-list h3 {
     margin-top: 0;
-    margin-bottom: 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    padding-bottom: 8px;
+    color: #333;
 }
 
-/* Class details styling */
-.class-item p {
-    font-size: 1.1rem;
-    margin: 8px 0;
+.classes-list p {
+    color: #666;
+    margin-bottom: 5px;
 }
 
-.class-item p strong {
-    font-weight: 700;
-    display: inline-block;
-    width: 100px;
+.join-button {
+    padding: 8px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 1em;
 }
 
-/* Empty classes message */
-.container > p {
-    text-align: center;
-    font-size: 1.2rem;
-    color: rgba(30, 28, 27, 0.923);
-    margin: 40px 0;
-    font-style: italic;
-}
-
-/* Footer styling */
-footer {
-    background-color: rgb(34, 31, 23);
-    color: #f4f4f4;
-    text-align: center;
-    padding: 1.5rem 0;
-    margin-top: 30px;
-    font-family: 'PT Sans', sans-serif;
-    width: 100%;
-    position: relative;
-}
-
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .container {
-        margin: 15px;
-        width: calc(100% - 30px);
-        padding: 20px;
-    }
-    
-    h1 {
-        font-size: 2rem;
-    }
-    
-    .class-item {
-        padding: 15px;
-    }
-    
-    .class-item p strong {
-        width: 80px;
-    }
+.join-button:hover {
+    background-color: #1e7e34;
 }

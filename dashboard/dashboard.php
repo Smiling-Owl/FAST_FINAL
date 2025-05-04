@@ -37,7 +37,7 @@ if (!isset($_SESSION['username'])) {
 <header>
         <div class="navigation-bar">
             <div id="navigation-container">
-                <img src="../images/FAST Logo Trans.png" alt="FAST Logo">
+                <img src="../images/icon.png" alt="FAST Logo">
                 <ul>
                     <li><a href="#about" aria-label="About FAST">ABOUT</a></li>
                     <li><a href="../request/request.php" aria-label="Request Tutoring">REQUEST</a></li>

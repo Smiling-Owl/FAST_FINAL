@@ -31,7 +31,7 @@ $result_classes = $stmt_classes->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutor Dashboard</title>
-    <link rel="icon" type="image/x-icon" href="../images/FAST logo white trans.png">
+    <link rel="icon" type="image/x-icon" href="../images/icon.png">
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="tutor_dashboard.css">
 </head>
@@ -39,7 +39,7 @@ $result_classes = $stmt_classes->get_result();
     <header>
         <div class="navigation-bar">
             <div id="navigation-container">
-                <img src="../images/FAST Logo Trans.png" alt="FAST Logo">
+                <img src="../images/icon.png" alt="FAST Logo">
                 <ul>
                     <li><a href="tutor_dashboard.php" aria-label="Tutor Dashboard">TUTOR DASHBOARD</a></li>
                     <li><a href="../dashboard/dashboard.php">STUDENT DASHBOARD</a></li>
