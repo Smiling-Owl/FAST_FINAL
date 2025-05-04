@@ -63,7 +63,7 @@ body {
 .navigation-bar li a {
     transition: transform 0.5s;
     color: #F4F4F4;
-    font-size: 15px;
+    font-size: 12px;
     font-family: 'Oswald';
     text-decoration: none; /* Remove underline from links */
     line-height: 70px; /* Vertically center text inside the link */
@@ -73,7 +73,7 @@ body {
 
 .navigation-bar li a:hover {
     opacity: 1; /* Full opacity on hover */
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .navigation-bar img {
