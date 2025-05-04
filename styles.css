@@ -356,39 +356,6 @@ body {
     font-size: 0.9rem; /* Smaller font size */
 }
 
-
-.dropdown .DropApplication {
-    min-width: 100px;
-    font-size: 15px;
-    text-align: center;
-    border: none;
-    background-color: inherit; /* same color as others */
-}
-
-.Dropdown_Application {
-    display: none;
-    position: absolute;
-    min-width: 135px;
-    box-shadow: 5%;
-    border-radius: 5%;
-    z-index: 1;
-}
-  
-.Dropdown_Application a {
-    background-color: #895129;
-    float: none;
-    text-decoration: none;
-    display: block;
-    text-align: center;
-    border-radius: 5%;
-}
-  
-.dropdown:hover .Dropdown_Application {
-    background-color: #7e461e;
-    display: block;
-    box-shadow: 10%;
-}
-
 .report_section {
     padding: 2rem;
     background-color: #f9f9f9;

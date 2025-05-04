@@ -30,18 +30,11 @@ if (isset($_SESSION['user_id'])) {
   <header>
     <div class="navigation-bar">
       <div id="navigation-container">
-        <img src="images/FAST Logo Trans.png" alt="FAST Logo">
+        <img src="images/icon.png" alt="FAST Logo">
         <ul>
           <li><a href="#about" aria-label="About FAST">ABOUT</a></li>
           <li><a href="https://drive.google.com/file/d/1nHvpnqNicJBeiuxhJk2B0ViLr556tSRM/view" target="_blank" rel="noopener noreferrer" aria-label="Developers (opens in a new tab)">DEVELOPERS</a></li>
-
-          <li>
-            <?php if (!isset($_SESSION['user_id'])): ?>
-              <div class="dropdown">
-                <a href="login/login.php"><button class="DropApplication">LOG IN NOW! <i class="down"></i></button></a>
-              </div>
-            <?php endif; ?>
-          </li>
+          <li><a href="login/login.php">LOG IN NOW</a></li>
         </ul>
       </div>
     </div>
