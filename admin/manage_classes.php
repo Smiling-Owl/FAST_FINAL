@@ -1,442 +1,172 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap');
+<?php
+session_start();
 
-/* Reset and Base */
-body {
-  ---nav-height: 100px;
-  padding-top: var(---nav-height);
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  background-color: #FFF5E3;
-  font-family: 'Montserrat', sans-serif;
+// Check if the admin is logged in
+if (!isset($_SESSION['admin_id'])) {
+    header("Location: admin_login.php");
+    exit();
 }
 
-/* Navigation Bar */
+// Database connection
+$conn = new mysqli("localhost", "root", "", "fastdb");
 
-.navigation-bar {
-  background-color: #7e461e;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 70px;
-  padding: 10px 20px;
-  z-index: 10;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 1);
-  transition: transform 0.5s;
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
-.navigation-bar img {
-  height: 60px
+// Pagination settings
+$items_per_page = 12; // Number of classes per page
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $items_per_page;
+
+// Get total number of classes
+$count_sql = "SELECT COUNT(*) as total FROM classes";
+$count_result = $conn->query($count_sql);
+$total_classes = $count_result->fetch_assoc()['total'];
+$total_pages = ceil($total_classes / $items_per_page);
+
+// Fetch classes for current page
+$sql_classes = "SELECT
+                    c.class_id,
+                    c.class_name,
+                    c.description,
+                    c.room,
+                    c.timeslot_day,
+                    c.timeslot_time,
+                    ta.fullname AS tutor_name,
+                    c.is_open
+                FROM classes c
+                LEFT JOIN tutors t ON c.tutor_id = t.user_id
+                LEFT JOIN tutor_application ta ON t.user_id = ta.user_id
+                ORDER BY c.class_id DESC
+                LIMIT ? OFFSET ?";
+
+$stmt = $conn->prepare($sql_classes);
+$stmt->bind_param("ii", $items_per_page, $offset);
+$stmt->execute();
+$result_classes = $stmt->get_result();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Classes - FAST Admin</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.png">
+    <link rel="stylesheet" href="styles/manage_classes.css">
+</head>
+<body>
+    <header>
+        <div class="navigation-bar">
+            <div id="navigation-container">
+                <img src="../images/icon.png" alt="FAST Logo">
+                <ul>
+                    <li><a href="admin_dashboard.php" aria-label="Admin Dashboard">ADMIN DASHBOARD</a></li>
+                    <li><a href="popular_requests.php" aria-label="Popular Requests">POPULAR REQUESTS</a></li>
+                    <li><a href="manage_applications.php" aria-label="Manage Applications">MANAGE APPLICATIONS</a></li>
+                    <li><a href="manage_tutor_applications.php" aria-label="Manage Tutor Applications">MANAGE TUTOR APPLICATIONS</a></li>
+                    <li><a href="manage_classes.php" aria-label="Manage Classes">MANAGE CLASSES</a></li>
+                    <li><a href="logout.php">LOG OUT</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="carousel-image">
+        <img src="../images/carousel_1.jpg" alt="Hero Image 1" class="carousel-slide active">
+        <img src="../images/carousel_2.jpg" alt="Hero Image 2" class="carousel-slide">
+        <img src="../images/carousel_3.jpg" alt="Hero Image 3" class="carousel-slide">
+        <img src="../images/carousel_4.jpg" alt="Hero Image 4" class="carousel-slide">
+    </div>
+
+    <div class="container">
+        <h1>MANAGE CLASSES</h1>
+        
+        <div class="add-new-class">
+            <a href="add_class.php">Add New Class</a>
+        </div>
+
+        <div class="class-list">
+            <table class="classes-table">
+                <thead>
+                    <tr>
+                        <th>Class</th>
+                        <th>Description</th>
+                        <th>Room</th>
+                        <th>Day</th>
+                        <th>Time</th>
+                        <th>Tutor</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                if ($result_classes && $result_classes->num_rows > 0) {
+                    while ($row = $result_classes->fetch_assoc()) {
+                        echo '<tr>';
+                        echo '<td>' . htmlspecialchars($row['class_name']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['description']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['room']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['timeslot_day']) . '</td>';
+                        echo '<td>' . htmlspecialchars(date("h:i A", strtotime($row['timeslot_time']))) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['tutor_name'] ? $row['tutor_name'] : 'Not Assigned') . '</td>';
+                        echo '<td><span class="status-badge ' . ($row['is_open'] ? 'status-open' : 'status-closed') . '">' . ($row['is_open'] ? 'Open' : 'Closed') . '</span></td>';
+                        echo '<td><div class="action-buttons">';
+                        echo '<a href="edit_class.php?class_id=' . htmlspecialchars($row['class_id']) . '" class="edit-button">EDIT</a>';
+                        echo '<form method="post" action="process_delete_class.php" style="display:inline;">';
+                        echo '<input type="hidden" name="class_id" value="' . htmlspecialchars($row['class_id']) . '">';
+                        echo '<button type="submit" class="delete-button" onclick="return confirm(\'Are you sure you want to delete this class?\');">DELETE</button>';
+                        echo '</form>';
+                        echo '</div></td>';
+                        echo '</tr>';
+                    }
+                } else {
+                    echo '<tr><td colspan="8" style="text-align:center;">No classes available.</td></tr>';
+                }
+                ?>
+                </tbody>
+            </table>
+        </div>
+
+        <?php if ($total_pages > 1): ?>
+        <div class="pagination">
+            <?php if ($page > 1): ?>
+                <a href="?page=<?php echo $page - 1; ?>" class="pagination-button">Previous</a>
+            <?php endif; ?>
+            
+            <?php
+            $start_page = max(1, $page - 2);
+            $end_page = min($total_pages, $page + 2);
+            
+            for ($i = $start_page; $i <= $end_page; $i++):
+            ?>
+                <a href="?page=<?php echo $i; ?>" class="pagination-button <?php echo $i == $page ? 'active' : ''; ?>">
+                    <?php echo $i; ?>
+                </a>
+            <?php endfor; ?>
+            
+            <?php if ($page < $total_pages): ?>
+                <a href="?page=<?php echo $page + 1; ?>" class="pagination-button">Next</a>
+            <?php endif; ?>
+        </div>
+        <?php endif; ?>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; <?php echo date("Y"); ?> Foundation of Ateneo Student Tutors - Admin Area</p>
+        </div>
+    </footer>
+    
+    <script src="../index.js"></script>
+</body>
+</html>
+
+<?php
+// Close the database connection
+if (isset($conn)) {
+    $conn->close();
 }
-
-#navigation-container {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  margin-right: 20px;
-}
-
-.navigation-bar ul {
-  display: flex;
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-  flex-wrap: wrap;
-}
-
-.navigation-bar li {
-  text-align: center;
-  min-width: 140px;
-  border-radius: 5%;
-  background-color: #895129;
-  margin: 0 2px;
-}
-
-.navigation-bar li a {
-  transition: transform 0.5s;
-  color: #F4F4F4;
-  font-size: 12px;
-  font-family: 'Oswald', sans-serif;
-  text-decoration: none;
-  line-height: 70px;
-  padding: 5px 20px;
-  opacity: 0.6;
-}
-
-.navigation-bar li a:hover {
-  opacity: 1;
-  font-size: 16px;
-}
-
-/* Carousel */
-.carousel-image {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  z-index: -1;
-}
-
-.carousel-slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-}
-
-.carousel-slide.active {
-  opacity: 1;
-}
-
-.carousel-image::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.35);
-  z-index: 1;
-}
-
-/* Modern Manage Classes Table and Container Styles */
-
-.container {
-  max-width: 1200px; /* Increased max-width */
-  margin: 120px auto 40px auto;
-  padding: 40px 40px 40px 40px; /* Increased padding for more space inside */
-  background: rgba(255, 247, 237, 0.97);
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.13), 0 2px 8px rgba(44, 62, 80, 0.10);
-}
-
-.class-list {
-  margin-top: 24px;
-}
-
-.classes-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(44, 62, 80, 0.10);
-  overflow: hidden;
-  margin-bottom: 36px;
-  table-layout: auto;
-  border: 1.5px solid #e0e0e0;
-}
-
-.classes-table th,
-.classes-table td {
-  padding: 16px 18px;
-  text-align: left;
-  border-bottom: 1px solid #eee;
-  font-size: 1.07em;
-}
-
-.classes-table th {
-  background-color: #f8f9fa;
-  font-weight: 700;
-  color: #2c3e50;
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  letter-spacing: 0.5px;
-}
-
-.classes-table tr:nth-child(even) {
-  background-color: #f6f6f6;
-}
-
-.classes-table tr:hover {
-  background-color: #e3f2fd;
-}
-
-.classes-table tr:last-child td {
-  border-bottom: none;
-}
-
-.status-badge {
-  padding: 5px 14px;
-  border-radius: 13px;
-  font-size: 1em;
-  font-weight: 600;
-  text-align: center;
-  display: inline-block;
-  letter-spacing: 0.2px;
-}
-
-.status-open {
-  background-color: #e8f5e9;
-  color: #2e7d32;
-}
-
-.status-closed {
-  background-color: #ffebee;
-  color: #c62828;
-}
-
-.action-buttons {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.edit-button,
-.delete-button {
-  padding: 8px 18px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 1em;
-  transition: background 0.18s, box-shadow 0.18s, color 0.18s;
-  text-decoration: none;
-  outline: none;
-  box-shadow: 0 1px 4px rgba(44, 62, 80, 0.07);
-  display: inline-block;
-}
-
-.edit-button {
-  background-color: #2196f3;
-  color: #fff;
-}
-
-.edit-button:hover {
-  background-color: #1769aa;
-  color: #fff;
-}
-
-.delete-button {
-  background-color: #f44336;
-  color: #fff;
-}
-
-.delete-button:hover {
-  background-color: #b71c1c;
-  color: #fff;
-}
-
-@media (max-width: 700px) {
-  .container {
-    padding: 4vw 2vw;
-  }
-  .classes-table th,
-  .classes-table td {
-    padding: 8px 6px;
-    font-size: 0.97em;
-  }
-}
-
-@media (max-width: 600px) {
-  .classes-table {
-    display: block;
-    overflow-x: auto;
-    font-size: 0.95em;
-  }
-  .classes-table th,
-  .classes-table td {
-    white-space: nowrap;
-  }
-  .action-buttons {
-    flex-direction: column;
-    gap: 4px;
-    align-items: stretch;
-  }
-  .edit-button,
-  .delete-button {
-    width: 100%;
-  }
-}
-
-footer {
-  background-color: #221f17;
-  color: #f4f4f4;
-  text-align: center;
-  padding: 2rem 0;
-  margin-top: 40px;
-}
-
-.footer-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-  font-size: 0.9rem;
-}
-
-.footer_title {
-  font-family: "Montserrat", sans-serif;
-  margin: 0.5rem 0;
-  font-size: 1.5rem;
-}
-
-.footer_contact {
-  margin: 1rem 0;
-}
-
-.footer_contact a {
-  color: white;
-  text-decoration: none;
-}
-
-.footer_copy {
-  margin-top: 1rem;
-  font-size: 0.9rem;
-}
-
-@media (max-width: 768px) {
-  .navigation-bar {
-    flex-direction: column;
-    height: auto;
-    padding: 10px 0;
-  }
-
-  .navigation-bar ul {
-    flex-direction: column;
-    width: 100%;
-    text-align: center;
-  }
-
-  .navigation-bar li {
-    width: 100%;
-    margin: 0;
-    padding: 5px 0;
-  }
-
-  .navigation-bar li a {
-    line-height: 40px;
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  .navigation-bar img {
-    margin-bottom: 10px;
-    height: 40px;
-  }
-
-  .container {
-    max-width: 100%;
-    margin: 100px 20px 20px;
-    padding: 15px;
-  }
-}
-
-.add-new-class {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.add-new-class a {
-  display: inline-block;
-  margin-bottom: 20px;
-  background-color: #28a745;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 5px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-  font-size: 14px;
-}
-
-.add-new-class a:hover {
-  background-color: #218838;
-}
-
-.vertical-table {
-  width: 100%;
-  max-width: 600px;
-  margin: 20px auto;
-  border-collapse: collapse;
-  background-color: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.vertical-table th {
-  width: 30%;
-  background-color: #7e461e;
-  color: white;
-  text-align: left;
-  padding: 12px;
-  font-weight: 600;
-}
-
-.vertical-table td {
-  width: 70%;
-  padding: 12px;
-  border-bottom: 1px solid #ddd;
-  color: #333;
-}
-
-.vertical-table tr:last-child td {
-  border-bottom: none;
-}
-
-.vertical-table td .edit-button,
-.vertical-table td .delete-button {
-  padding: 6px 12px;
-  font-size: 13px;
-  border: none;
-  border-radius: 5px;
-  text-decoration: none;
-  color: white;
-  cursor: pointer;
-  margin-right: 10px;
-  transition: background-color 0.3s ease;
-}
-
-.edit-button {
-  color: #0d1217;
-  font-family: "Montserrat", sans-serif;
-  font-size: 14px;
-}
-
-.edit-button:hover {
-  color: #0056b3;
-  font-size: 14px;
-}
-
-.delete-button {
-  color: #0d1217;
-  font-family: "Montserrat", sans-serif;
-  font-size: 14px;
-}
-
-.delete-button:hover {
-  background-color: #c82333;
-  font-size: 14px;
-}
-
-footer {
-  background-color: #7e461e;
-  color: white;
-  text-align: center;
-  padding: 10px;
-  margin-top: auto;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-}
-
-.main-content {
-  margin-top: 80px;
-}
-
-.main-content h1 {
-  margin-top: 20px;
-  padding: 10px;
-  text-align: center;
-}
+?>
