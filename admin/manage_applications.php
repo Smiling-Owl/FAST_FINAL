@@ -14,13 +14,24 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Query to count the occurrences of each requested subject
-$sql = "SELECT subject, COUNT(*) AS request_count
-        FROM tutoring_requests
-        GROUP BY subject
-        ORDER BY request_count DESC";
+// Fetch pending student applications with student username
+$sql_applications = "SELECT sa.id AS application_id,
+                             sa.fullname,
+                             sa.student_id,
+                             sa.email,
+                             sa.application_date,
+                             sa.status,
+                             u.username AS student_username
+                     FROM student_application sa
+                     INNER JOIN users u ON sa.user_id = u.id
+                     WHERE sa.status = 'pending'";
+$result_applications = $conn->query($sql_applications);
 
-$result = $conn->query($sql);
+if ($result_applications === false) {
+    echo "Error executing query: " . $conn->error;
+    die();
+}
+
 
 ?>
 
@@ -31,21 +42,6 @@ $result = $conn->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Student Applications - FAST Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/FAST logo white trans.png">
-    <link rel="icon" type="image/x-icon" href="../images/FAST logo white trans.png">
-    <link rel="icon" type="image/x-icon" href="/Main-images/FAST logo white trans.png">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/manage_applications.css">
     <script>
         function processApplication(applicationId, action) {
@@ -75,75 +71,55 @@ $result = $conn->query($sql);
 </head>
 <body>
     <header>
-        <div class = "page-wrapper">
-            <div class="navigation-bar">
-                <div id="navigation-container">
+        <div class="navigation-bar">
+            <div id="navigation-container">
                 <img src="../images/FAST Logo Trans.png" alt="FAST Logo">
-                    <ul>
-                        <li><a href="admin_dashboard.php" aria-label="Admin Dashboard">ADMIN DASHBOARD</a></li>
-                        <li><a href="popular_requests.php" aria-label="Popular Requests">POPULAR REQUESTS</a></li>
-                        <li><a href="manage_applications.php" aria-label="Manage Applications">MANAGE APPLICATIONS</a></li>
-                        <li><a href="manage_tutor_applications.php" aria-label="Manage Tutor Applications">MANAGE TUTOR APPLICATIONS</a></li>
-                        <li><a href="manage_classes.php" aria-label="Manage Classes">MANAGE CLASSES</a></li>
-                        <li><a href="logout.php">LOG OUT</a></li>
-                    </ul>
-                </div>
+                <ul>
+                    <li><a href="admin_dashboard.php" aria-label="Admin Dashboard">ADMIN DASHBOARD</a></li>
+                    <li><a href="popular_requests.php" aria-label="Popular Requests">POPULAR REQUESTS</a></li>
+                    <li><a href="manage_applications.php" aria-label="Manage Applications">MANAGE APPLICATIONS</a></li>
+                    <li><a href="manage_tutor_applications.php" aria-label="Manage Tutor Applications">MANAGE TUTOR APPLICATIONS</a></li>
+                    <li><a href="manage_classes.php" aria-label="Manage Classes">MANAGE CLASSES</a></li>
+                    <li><a href="logout.php">LOG OUT</a></li>
+                </ul>
             </div>
-        </header>
-    
-        <div class="container">
-            <h1>Manage Student Applications</h1>
-        
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Application ID</th>
-                            <th>Full Name</th>
-                            <th>Student ID</th>
-                            <th>Email</th>
-                            <th>Application Date</th>
-                            <th>Status</th>
-                            <th>Student Username</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        if ($result_applications && $result_applications->num_rows > 0) {
-                            while ($row = $result_applications->fetch_assoc()) {
-                                echo '<tr>';
-                                echo '<td>' . htmlspecialchars($row['application_id']) . '</td>';
-                                echo '<td>' . htmlspecialchars($row['fullname']) . '</td>';
-                                echo '<td>' . htmlspecialchars($row['student_id']) . '</td>';
-                                echo '<td>' . htmlspecialchars($row['email']) . '</td>';
-                                echo '<td>' . htmlspecialchars($row['application_date']) . '</td>';
-                                echo '<td>' . htmlspecialchars($row['status']) . '</td>';
-                                echo '<td>' . htmlspecialchars($row['student_username']) . '</td>';
-                                echo '<td><button class="approve-button" onclick="processApplication(' . htmlspecialchars($row['application_id']) . ', \'approve\')">&#10003;</button><button class="reject-button" onclick="processApplication(' . htmlspecialchars($row['application_id']) . ', \'reject\')">&#10005;</button></td>';
-                                echo '</tr>';
-                            }
-                        } else {
-                            echo '<tr><td colspan="8">No pending student applications.</td></tr>';
-                        }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-        <div class="carousel-image">
-            <img src="../Main-images/carousel_1.jpg" alt="Hero Image 1" class="carousel-slide">
-            <img src="../Main-images/carousel_2.jpg" alt="Hero Image 2" class="carousel-slide">
-            <img src="../Main-images/carousel_3.jpg" alt="Hero Image 3" class="carousel-slide">
-            <img src="../Main-images/carousel_4.jpg" alt="Hero Image 4" class="carousel-slide">
-          </div>
-          <div class="carousel-overlay"></div>
         </div>
+    </header>
+
+    <div class="container">
+        <h1>Manage Student Applications</h1>
+
+        <div class="application-list">
+            <?php
+            if ($result_applications && $result_applications->num_rows > 0) {
+                while ($row = $result_applications->fetch_assoc()) {
+                    echo '<div class="application-item">';
+                    echo '<h4>Application ID: ' . htmlspecialchars($row['application_id']) . '</h4>';
+                    echo '<p>Full Name: ' . htmlspecialchars($row['fullname']) . '</p>';
+                    echo '<p>Student ID: ' . htmlspecialchars($row['student_id']) . '</p>';
+                    echo '<p>Email: ' . htmlspecialchars($row['email']) . '</p>';
+                    echo '<p>Applied On: ' . htmlspecialchars($row['application_date']) . '</p>';
+                    echo '<p>Status: ' . htmlspecialchars($row['status']) . '</p>';
+                    echo '<p>Student Username: ' . htmlspecialchars($row['student_username']) . '</p>';
+                    echo '<div class="action-buttons">';
+                    echo '<button class="approve-button" onclick="processApplication(' . htmlspecialchars($row['application_id']) . ', \'approve\')">Approve</button>';
+                    echo '<button class="reject-button" onclick="processApplication(' . htmlspecialchars($row['application_id']) . ', \'reject\')">Reject</button>';
+                    echo '</div>';
+                    echo '</div>';
+                }
+            } else {
+                echo '<p>No pending student applications.</p>';
+            }
+            ?>
+        </div>
+    </div>
+
     <footer>
         <div class="footer-content">
             <p>&copy; <?php echo date("Y"); ?> Foundation of Ateneo Student Tutors - Admin Area</p>
         </div>
     </footer>
-    <script src="JS_admin.js"></script>
+
 </body>
 </html>
 
