@@ -69,14 +69,14 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAST Admin Dashboard</title>
-    <link rel="icon" type="image/x-icon" href="../admin/Admin-images/FAST logo white trans.png">
+    <link rel="icon" type="image/x-icon" href="../images/FAST logo white trans.png">
     <link rel="stylesheet" href="styles/admin_dashboard_style.css">
 </head>
 
 <body>
     <header>
       <div class="navigation_bar">
-        <img src="../admin/Admin-images/FAST logo white trans.png" alt="FAST Logo">
+        <img src="../images/FAST logo white trans.png" alt="FAST Logo">
       
         <div class="nav_menu_wrapper">
           <ul>
@@ -122,7 +122,7 @@ $conn->close();
     </div>
 
     <div class="reports-section">
-    <h2 id="reports_header">Submitted Reports</h2>
+    <h2 id="reports_header">SUBMITTED REPORTS!</h2>
     <?php if ($result_reports->num_rows > 0): ?>
         <div class="reports-table-container">
             <table class="reports-table">
@@ -163,4 +163,3 @@ $conn->close();
 
 </body>
 </html>
-
