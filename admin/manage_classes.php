@@ -81,8 +81,8 @@ $result_classes = $stmt->get_result();
     </div>
 
     <div class="container">
-        <h1>Manage Classes</h1>
-
+        <h1>MANAGE CLASSES</h1>
+        
         <div class="add-new-class">
             <a href="add_class.php">Add New Class</a>
         </div>
