@@ -54,7 +54,7 @@ $result_tutors = $conn->query($sql_tutors);
     </header>
 
     <div class="container">
-        <h1>Add New Class</h1>
+        <h1>ADD NEW CLASS</h1>
 
         <div class="form-container">
             <?php
@@ -88,7 +88,6 @@ $result_tutors = $conn->query($sql_tutors);
             }
             ?>
             <form method="POST" action="">
-                <h2>Add New Class</h2>
                 <div class="form-group">
                     <label for="class_name">Class Name:</label>
                     <input type="text" id="class_name" name="class_name" required>
