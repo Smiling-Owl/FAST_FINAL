@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Student Registration</title>
-    <link rel="icon" type="image/x-icon" href="../images/FAST Logo Trans.png">
+    <link rel="icon" type="image/x-icon" href="../images/icon.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="register_style.css">
 </head>

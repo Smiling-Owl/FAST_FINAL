@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Foundation of Ateneo Student Tutors</title>
-  <link rel="icon" type="image/x-icon" href="../images/FAST logo white trans.png">
+  <link rel="icon" type="image/x-icon" href="../images/icon.png">
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="request_style.css">
   <link rel="icon" type="image/x-icon" href="/Main-images/FAST logo white trans.png">

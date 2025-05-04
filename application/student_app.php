@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Student's Application Page</title>
-    <link rel="icon" type="image/x-icon" href="/Main-images/FAST logo white trans.png">
+    <link rel="icon" type="image/x-icon" href="../images/icon.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="application.css">
 </head>

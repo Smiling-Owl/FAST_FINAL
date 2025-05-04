@@ -15,7 +15,7 @@ if ($conn->connect_error) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Available Classes</title>
-    <link rel="icon" type="image/x-icon" href="../images/FAST logo white trans.png">
+    <link rel="icon" type="image/x-icon" href="../images/icon.png">
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="search_classes.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

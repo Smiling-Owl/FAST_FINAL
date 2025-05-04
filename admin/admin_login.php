@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>FAST Admin Login</title>
-    <link rel="icon" type="image/x-icon" href="../images/FAST Logo Trans.png">
+    <link rel="icon" type="image/x-icon" href="../images/icon.png">
     <link rel="stylesheet" type="text/css" href="styles/admin_login_style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

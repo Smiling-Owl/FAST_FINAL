@@ -30,7 +30,7 @@ $result_tutors = $conn->query($sql_tutors);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add New Class - FAST Admin</title>
-    <link rel="icon" type="image/x-icon" href="../images/FAST logo white trans.png">
+    <link rel="icon" type="image/x-icon" href="../images/icon.png">
     <link rel="stylesheet" href="styles/add_class_style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

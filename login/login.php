@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en">
 <head>
     <title>FAST Student Login</title>
-    <link rel="icon" type="image/x-icon" href="../images/FAST Logo Trans.png">
+    <link rel="icon" type="image/x-icon" href="../images/icon.png">
     <link rel="stylesheet" type="text/css" href="login_style.css">
 
     <!-- Google Fonts (combined) -->
