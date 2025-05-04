@@ -88,19 +88,21 @@ $result_tutor_application = $conn->query($sql_tutor_application);
 
         <div class="application-list">
             <?php
-            if ($result_tutor_application && $result_tutor_application->num_rows > 0) {
+            if (
+                $result_tutor_application && $result_tutor_application->num_rows > 0
+            ) {
                 while ($row = $result_tutor_application->fetch_assoc()) {
                     echo '<div class="application-item">';
-                    echo '<h4>Application ID: ' . htmlspecialchars($row['application_id']) . '</h4>';
-                    echo '<p>Full Name: ' . htmlspecialchars($row['fullname']) . '</p>';
-                    echo '<p>Student ID: ' . htmlspecialchars($row['student_id']) . '</p>';
-                    echo '<p>Birthdate: ' . htmlspecialchars($row['birthdate']) . '</p>';
-                    echo '<p>Email: ' . htmlspecialchars($row['email']) . '</p>';
-                    echo '<p>Facebook Link: ' . htmlspecialchars($row['fb_link']) . '</p>';
-                    echo '<p>Applied On: ' . htmlspecialchars($row['application_date']) . '</p>';
-                    echo '<p>Expertise: ' . htmlspecialchars($row['course_excel']) . '</p>';
-                    echo '<p>Why Tutor: ' . htmlspecialchars($row['why']) . '</p>';
-                    echo '<p>Status: ' . htmlspecialchars($row['status']) . '</p>';
+                    echo '<div class="application-row"><span class="label">Application ID:</span><span class="value">' . htmlspecialchars($row['application_id']) . '</span></div>';
+                    echo '<div class="application-row"><span class="label">Full Name:</span><span class="value">' . htmlspecialchars($row['fullname']) . '</span></div>';
+                    echo '<div class="application-row"><span class="label">Student ID:</span><span class="value">' . htmlspecialchars($row['student_id']) . '</span></div>';
+                    echo '<div class="application-row"><span class="label">Birthdate:</span><span class="value">' . htmlspecialchars($row['birthdate']) . '</span></div>';
+                    echo '<div class="application-row"><span class="label">Email:</span><span class="value">' . htmlspecialchars($row['email']) . '</span></div>';
+                    echo '<div class="application-row"><span class="label">Facebook Link:</span><span class="value">' . htmlspecialchars($row['fb_link']) . '</span></div>';
+                    echo '<div class="application-row"><span class="label">Applied On:</span><span class="value">' . htmlspecialchars($row['application_date']) . '</span></div>';
+                    echo '<div class="application-row"><span class="label">Expertise:</span><span class="value">' . htmlspecialchars($row['course_excel']) . '</span></div>';
+                    echo '<div class="application-row"><span class="label">Why Tutor:</span><span class="value">' . htmlspecialchars($row['why']) . '</span></div>';
+                    echo '<div class="application-row"><span class="label">Status:</span><span class="value">' . htmlspecialchars($row['status']) . '</span></div>';
                     echo '<div class="action-buttons">';
                     echo '<button class="approve-button" onclick="processTutorApplication(' . htmlspecialchars($row['application_id']) . ', \'approve\')">Approve</button>';
                     echo '<button class="reject-button" onclick="processTutorApplication(' . htmlspecialchars($row['application_id']) . ', \'reject\')">Reject</button>';
