@@ -37,14 +37,14 @@ $result_classes = $conn->query($sql_classes);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Classes - FAST Admin</title>
-    <link rel="icon" type="image/x-icon" href="../images/FAST logo white trans.png">
+    <link rel="icon" type="image/x-icon" href="../images/icon.png">
     <link rel="stylesheet" href="styles/manage_classes.css">
 </head>
 <body>
     <header>
         <div class="navigation-bar">
             <div id="navigation-container">
-                <img src="../images/FAST Logo Trans.png" alt="FAST Logo">
+                <img src="../images/icon.png" alt="FAST Logo">
                 <ul>
                     <li><a href="admin_dashboard.php" aria-label="Admin Dashboard">ADMIN DASHBOARD</a></li>
                     <li><a href="popular_requests.php" aria-label="Popular Requests">POPULAR REQUESTS</a></li>
@@ -57,6 +57,14 @@ $result_classes = $conn->query($sql_classes);
         </div>
     </header>
 
+
+    <div class="carousel-image">
+    <img src="../images/carousel_1.jpg" alt="Hero Image 1" class="carousel-slide active">
+    <img src="../images/carousel_2.jpg" alt="Hero Image 2" class="carousel-slide">
+    <img src="../images/carousel_3.jpg" alt="Hero Image 3" class="carousel-slide">
+    <img src="../images/carousel_4.jpg" alt="Hero Image 4" class="carousel-slide">
+  </div>
+  
     <div class="container">
         <h1>Manage Classes</h1>
 
@@ -76,14 +84,15 @@ $result_classes = $conn->query($sql_classes);
                     echo '<div><strong>Time:</strong> ' . htmlspecialchars(date("h:i A", strtotime($row['timeslot_time']))) . '</div>';
                     echo '<div><strong>Tutor:</strong> ' . htmlspecialchars($row['tutor_name'] ? $row['tutor_name'] : 'Not Assigned') . '</div>';
                     echo '<div><strong>Status:</strong> ' . (htmlspecialchars($row['is_open']) ? 'Open' : 'Closed') . '</div>';
-                    echo '<div class="action-buttons">';
-                    echo '<a href="edit_class.php?class_id=' . htmlspecialchars($row['class_id']) . '" class="edit-button">Edit</a>';
-                    echo '<form method="post" action="process_delete_class.php" style="display:inline;">';
+                    
+                    echo '<div class="button-container">';
+                    echo '<a href="edit_class.php?class_id=' . htmlspecialchars($row['class_id']) . '" class="edit-button">EDIT</a>';
+                    echo '<form method="post" action="process_delete_class.php">';
                     echo '<input type="hidden" name="class_id" value="' . htmlspecialchars($row['class_id']) . '">';
-                    echo '<button type="submit" class="delete-button" onclick="return confirm(\'Are you sure you want to delete this class?\');">Delete</button>';
+                    echo '<button type="submit" class="delete-button" onclick="return confirm(\'Are you sure you want to delete this class?\');">DELETE</button>';
                     echo '</form>';
                     echo '</div>';
-
+                    
                     echo '</div>';
                 }
             } else {
@@ -98,7 +107,8 @@ $result_classes = $conn->query($sql_classes);
             <p>&copy; <?php echo date("Y"); ?> Foundation of Ateneo Student Tutors - Admin Area</p>
         </div>
     </footer>
-
+    
+    <script src="../index.js"></script>
 </body>
 </html>
 
