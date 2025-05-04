@@ -7,7 +7,6 @@ body {
     flex-direction: column;
     min-height: 100vh; /* Ensure body takes at least full height */
 }
-
 /* Navigation bar container */
 .navigation-bar {
     background-color: #7e461e; /* Nav bg color */
@@ -63,7 +62,7 @@ body {
 .navigation-bar li a {
     transition: transform 0.5s;
     color: #F4F4F4;
-    font-size: 12px;
+    font-size: 15px;
     font-family: 'Oswald';
     text-decoration: none; /* Remove underline from links */
     line-height: 70px; /* Vertically center text inside the link */
@@ -73,7 +72,7 @@ body {
 
 .navigation-bar li a:hover {
     opacity: 1; /* Full opacity on hover */
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .navigation-bar img {
@@ -135,13 +134,14 @@ body {
 }
 
 h1 {
-    font-family: 'Oswald';
     margin-top: 0;
     margin-bottom: 20px;
     color: #7e461e;
     font-size: 2rem;
     text-align: center;
+    font-family: 'Oswald';
 }
+
 .application-list {
     margin-top: 20px;
     display: flex;
