@@ -70,9 +70,9 @@ $result_tutor_application = $conn->query($sql_tutor_application);
     <header>
         <div class="navigation-bar">
             <div id="navigation-container">
-                <img src="../images/FAST Logo Trans.png" alt="FAST Logo">
+                <img src="../images/icon.png" alt="FAST Logo">
                 <ul>
-                <li><a href="admin_dashboard.php" aria-label="Admin Dashboard">ADMIN DASHBOARD</a></li>
+                    <li><a href="admin_dashboard.php" aria-label="Admin Dashboard">ADMIN DASHBOARD</a></li>
                     <li><a href="popular_requests.php" aria-label="Popular Requests">POPULAR REQUESTS</a></li>
                     <li><a href="manage_applications.php" aria-label="Manage Applications">MANAGE APPLICATIONS</a></li>
                     <li><a href="manage_tutor_applications.php" aria-label="Manage Tutor Applications">MANAGE TUTOR APPLICATIONS</a></li>
