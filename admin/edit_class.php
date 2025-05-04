@@ -1,26 +1,39 @@
 <?php
 session_start();
 
-// Check if the admin is logged in
 if (!isset($_SESSION['admin_id'])) {
     header("Location: admin_login.php");
     exit();
 }
 
-// Database connection
 $conn = new mysqli("localhost", "root", "", "fastdb");
-
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Query to count the occurrences of each requested subject
-$sql = "SELECT subject, COUNT(*) AS request_count
-        FROM tutoring_requests
-        GROUP BY subject
-        ORDER BY request_count DESC";
+// Fetch tutors for the dropdown
+$sql_tutors = "SELECT t.id AS tutor_id, ta.fullname AS tutor_fullname FROM tutors t INNER JOIN tutor_application ta ON t.user_id = ta.user_id";
+$result_tutors = $conn->query($sql_tutors);
 
-$result = $conn->query($sql);
+// Fetch class details if editing
+if (isset($_GET['class_id'])) {
+    $class_id_edit = $_GET['class_id'];
+    $sql_class = "SELECT * FROM classes WHERE class_id = ?";
+    $stmt_class = $conn->prepare($sql_class);
+    $stmt_class->bind_param("i", $class_id_edit);
+    $stmt_class->execute();
+    $result_class = $stmt_class->get_result();
+    if ($result_class->num_rows === 1) {
+        $class_data = $result_class->fetch_assoc();
+    } else {
+        echo "Class not found.";
+        exit();
+    }
+    $stmt_class->close();
+} else {
+    echo "No class ID specified.";
+    exit();
+}
 
 ?>
 
@@ -31,23 +44,8 @@ $result = $conn->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Class - FAST Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/FAST logo white trans.png">
-    <link rel="icon" type="image/x-icon" href="../images/FAST logo white trans.png">
-    <link rel="icon" type="image/x-icon" href="/Main-images/FAST logo white trans.png">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/edit_class.css">
-</head>
 </head>
 <body>
     <header>
@@ -60,7 +58,7 @@ $result = $conn->query($sql);
                     <li><a href="manage_applications.php" aria-label="Manage Applications">MANAGE APPLICATIONS</a></li>
                     <li><a href="manage_tutor_applications.php" aria-label="Manage Tutor Applications">MANAGE TUTOR APPLICATIONS</a></li>
                     <li><a href="manage_classes.php" aria-label="Manage Classes">MANAGE CLASSES</a></li>
-                    <li><a href="logout.php">LOG OUT</a></li> <!--// Adjust if you don't have this file ?-->
+                    <li><a href="logout.php">LOG OUT</a></li> 
                 </ul>
             </div>
         </div>
@@ -135,19 +133,13 @@ $result = $conn->query($sql);
             </form>
         </div>
     </div>
-    <div class="carousel-image">
-        <img src="../Main-images/carousel_1.jpg" alt="Hero Image 1" class="carousel-slide">
-        <img src="../Main-images/carousel_2.jpg" alt="Hero Image 2" class="carousel-slide">
-        <img src="../Main-images/carousel_3.jpg" alt="Hero Image 3" class="carousel-slide">
-        <img src="../Main-images/carousel_4.jpg" alt="Hero Image 4" class="carousel-slide">
-      </div>
-      <div class="carousel-overlay"></div>
+
     <footer>
         <div class="footer-content">
             <p>&copy; <?php echo date("Y"); ?> Foundation of Ateneo Student Tutors - Admin Area</p>
         </div>
     </footer>
-    <script src="JS_admin.js"></script>
+
 </body>
 </html>
 

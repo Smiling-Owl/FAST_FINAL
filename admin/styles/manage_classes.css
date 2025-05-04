@@ -104,163 +104,134 @@ body {
     z-index: -1;
 }
 
+/* Container */
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     padding: 40px 20px;
-    margin-top: 100px;
+    margin-top: calc(var(--nav-height) + 20px);
     background-color: rgba(255, 245, 227, 0.9);
     border-radius: 12px;
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    min-height: 80vh;
 }
 
-h1 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    color: #7e461e;
-    font-size: 2rem;
-    text-align: center;
-    font-family: 'Oswald', sans-serif;
-}
-
-.application-list {
+/* Add New Class Button */
+.add-new-class {
     margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    max-height: 600px;
-    overflow-y: auto;
-    gap: 15px;
-    padding: 10px;
-    scroll-snap-type: y mandatory;
-}
-
-.application-item {
-    background-color: #f9f9f9;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    flex: 0 0 auto;
     width: 100%;
-    scroll-snap-align: start;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-.action-buttons {
-    display: flex;
-    gap: 10px;
-    justify-content: space-between;
+    text-align: right;
 }
 
-button {
-    padding: 8px 15px;
-    border: none;
+.add-new-class a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
     border-radius: 5px;
-    cursor: pointer;
-    margin: 0 5px;
+    font-weight: bold;
     transition: background-color 0.3s ease;
 }
 
-.approve-button {
-    background-color: #28a745;
-    color: white;
+.add-new-class a:hover {
+    background-color: #1e7e34;
 }
 
-.approve-button:hover {
-    background-color: #218838;
-}
-
-button:hover {
-    background-color: #c20000;
-}
-
-button:focus {
-    outline: none;
-}
-
-.table-container {
-    overflow-x: auto;
+/* Class list and cards */
+.class-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
     width: 100%;
-    max-width: 100%;
-    margin-bottom: 20px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+.class-item {
     background-color: #fff;
-    margin-top: 20px;
+    border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    table-layout: auto;
-}
-
-th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    min-width: 100px;
-}
-
-th {
-    background-color: #7e461e;
-    color: #fff;
-}
-
-tr:hover {
-    background-color: #f9f9f9;
-}
-
-td[colspan="8"] {
-    text-align: center;
-    font-size: 1.2rem;
-    color: #888;
-}
-
-footer {
-    background-color: #7e461e;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    margin-top: auto;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-family: 'PT Sans', sans-serif;
     width: 100%;
-    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.class-item > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 4px;
+    border-bottom: 1px dashed #ccc;
+}
+
+.class-item > div:last-child {
+    border-bottom: none;
+}
+
+.class-item > div strong {
+    color: #7e461e;
+    font-weight: 600;
+    margin-right: 10px;
+    flex: 1;
+    text-align: left;
+}
+
+.class-item > div span {
+    flex: 2;
+    text-align: right;
+}
+
+/* Action buttons */
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.action-buttons button,
+.action-buttons a {
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    color: #fff;
+    border: none;
+}
+
+.edit-button {
+    background-color: #007bff;
+}
+
+.delete-button {
+    background-color: #dc3545;
+}
+
+/* Footer */
+footer {
     bottom: 0;
-}
-
-.footer-content {
-    text-align: center;
+    width: 100%;
+    background-color: rgb(34, 31, 23);
     color: white;
-    font-size: 16px;
-}
-
-.main-content {
-    margin-top: 80px;
-}
-
-.main-content h1 {
-    margin-top: 20px;
-    padding: 10px;
     text-align: center;
+    padding: 1rem;
+    font-family: 'PT Sans', sans-serif;
 }
 
-@media (max-width: 768px) {
-    .table-container {
-        overflow-x: auto;
-    }
-
-    table {
-        width: 100%;
-        table-layout: fixed;
-    }
+footer .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
 }
-
