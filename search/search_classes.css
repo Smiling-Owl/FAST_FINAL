@@ -7,11 +7,11 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding-top: 90px; /* Account for navbar height (70px) + padding */
     background-color: #FFF5E3;
     font-family: 'PT Sans', sans-serif;
     margin: 0;
-    padding: 0;
+    padding-top: 70px; /* Reduced from 500px to just account for navbar */
+    position: relative; /* Add this for footer positioning */
 }
 
 /* Container for dashboard content */
@@ -24,7 +24,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     font-family: 'PT Sans', sans-serif;
-    flex: 1; /* Allow container to grow and push footer down */
+    flex: 1; /* This makes the container grow to push footer down */
 }
 
 /* Page title styling */
@@ -123,10 +123,9 @@ footer {
     color: #f4f4f4;
     text-align: center;
     padding: 1.5rem 0;
-    margin-top: 30px;
     font-family: 'PT Sans', sans-serif;
     width: 100%;
-    position: relative;
+    margin-top: auto; /* This pushes the footer to the bottom */
 }
 
 .footer-content {

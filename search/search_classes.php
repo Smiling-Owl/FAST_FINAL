@@ -24,10 +24,14 @@ if ($conn->connect_error) {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #FFF5E3;
+            font-family: 'PT Sans', sans-serif;
             margin: 0;
-            padding: 0;
+            padding-top: 60px; /* Reduced from 500px to just account for navbar */
+            position: relative; /* Add this for footer positioning */
         }
         header {
             background-color: #003366;
@@ -125,10 +129,12 @@ if ($conn->connect_error) {
         }
         footer {
             background-color: #7e461e;
-            color: white;
+            color: #f4f4f4;
             text-align: center;
-            padding: 1rem 0;
-            margin-top: 2rem;
+            padding: 1.5rem 0;
+            font-family: 'PT Sans', sans-serif;
+            width: 100%;
+            margin-top: auto; /* This pushes the footer to the bottom */
         }
         footer .footer-content p {
             font-size: 0.9rem;
