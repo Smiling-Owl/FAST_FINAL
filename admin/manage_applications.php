@@ -41,7 +41,7 @@ if ($result_applications === false) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Student Applications - FAST Admin</title>
-    <link rel="icon" type="image/x-icon" href="../images/FAST logo white trans.png">
+    <link rel="icon" type="image/x-icon" href="../images/icon.png">
     <link rel="stylesheet" href="styles/manage_applications.css">
     <script>
         function processApplication(applicationId, action) {
@@ -73,7 +73,7 @@ if ($result_applications === false) {
     <header>
         <div class="navigation-bar">
             <div id="navigation-container">
-                <img src="../images/FAST Logo Trans.png" alt="FAST Logo">
+                <img src="../images/icon.png" alt="FAST Logo">
                 <ul>
                     <li><a href="admin_dashboard.php" aria-label="Admin Dashboard">ADMIN DASHBOARD</a></li>
                     <li><a href="popular_requests.php" aria-label="Popular Requests">POPULAR REQUESTS</a></li>
