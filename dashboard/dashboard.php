@@ -47,7 +47,7 @@ if (!isset($_SESSION['username'])) {
                                 <i class="down"></i>
                             </button>
                             <div class="Dropdown_Application">
-                                <a href="../application/apply_student.php" aria-label="Student Application">STUDENT</a>
+                                <a href="../application/apply_student.php" target="_blank" aria-label="Student Application">STUDENT</a>
                                 <a href="../application/tutor_app.php" target="_blank"
                                    aria-label="Tutor Application (opens in a new tab)">TUTORS</a>
                             </div>
