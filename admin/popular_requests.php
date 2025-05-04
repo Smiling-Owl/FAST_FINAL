@@ -72,12 +72,12 @@ $result = $conn->query($sql);
                             echo '<tr>';
                             echo '<td>' . htmlspecialchars($row['subject']) . '</td>';
                             echo '<td>' . htmlspecialchars($row['request_count']) . '</td>';
-                            echo '<td>
-                                    <form method="post" action="process_delete_request.php" style="display:inline;">
-                                        <input type="hidden" name="subject_to_delete" value="' . htmlspecialchars($row['subject']) . '">
-                                        <button type="submit" onclick="return confirm(\'Are you sure you want to delete all requests for this subject?\');">Delete</button>
-                                    </form>
-                                  </td>';
+                            echo '<td>';
+                            echo '<form method="post" action="process_delete_request.php" style="display:inline;">';
+                            echo '<input type="hidden" name="subject_to_delete" value="' . htmlspecialchars($row['subject']) . '">';
+                            echo '<button type="submit" onclick="return confirm(\'Are you sure you want to delete all requests for this subject?\');">Delete</button>';
+                            echo '</form>';
+                            echo '</td>';
                             echo '</tr>';
                         }
                     } else {

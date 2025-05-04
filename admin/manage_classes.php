@@ -14,7 +14,18 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch all classes with tutor information (joining tutors and tutor_application tables)
+// Pagination settings
+$items_per_page = 12; // Number of classes per page
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $items_per_page;
+
+// Get total number of classes
+$count_sql = "SELECT COUNT(*) as total FROM classes";
+$count_result = $conn->query($count_sql);
+$total_classes = $count_result->fetch_assoc()['total'];
+$total_pages = ceil($total_classes / $items_per_page);
+
+// Fetch classes for current page
 $sql_classes = "SELECT
                     c.class_id,
                     c.class_name,
@@ -25,10 +36,15 @@ $sql_classes = "SELECT
                     ta.fullname AS tutor_name,
                     c.is_open
                 FROM classes c
-                LEFT JOIN tutors t ON c.tutor_id = t.user_id  -- Corrected JOIN condition
-                LEFT JOIN tutor_application ta ON t.user_id = ta.user_id";
-$result_classes = $conn->query($sql_classes);
+                LEFT JOIN tutors t ON c.tutor_id = t.user_id
+                LEFT JOIN tutor_application ta ON t.user_id = ta.user_id
+                ORDER BY c.class_id DESC
+                LIMIT ? OFFSET ?";
 
+$stmt = $conn->prepare($sql_classes);
+$stmt->bind_param("ii", $items_per_page, $offset);
+$stmt->execute();
+$result_classes = $stmt->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -57,14 +73,13 @@ $result_classes = $conn->query($sql_classes);
         </div>
     </header>
 
-
     <div class="carousel-image">
-    <img src="../images/carousel_1.jpg" alt="Hero Image 1" class="carousel-slide active">
-    <img src="../images/carousel_2.jpg" alt="Hero Image 2" class="carousel-slide">
-    <img src="../images/carousel_3.jpg" alt="Hero Image 3" class="carousel-slide">
-    <img src="../images/carousel_4.jpg" alt="Hero Image 4" class="carousel-slide">
-  </div>
-  
+        <img src="../images/carousel_1.jpg" alt="Hero Image 1" class="carousel-slide active">
+        <img src="../images/carousel_2.jpg" alt="Hero Image 2" class="carousel-slide">
+        <img src="../images/carousel_3.jpg" alt="Hero Image 3" class="carousel-slide">
+        <img src="../images/carousel_4.jpg" alt="Hero Image 4" class="carousel-slide">
+    </div>
+
     <div class="container">
         <h1>Manage Classes</h1>
 
@@ -73,33 +88,70 @@ $result_classes = $conn->query($sql_classes);
         </div>
 
         <div class="class-list">
-            <?php
-            if ($result_classes && $result_classes->num_rows > 0) {
-                while ($row = $result_classes->fetch_assoc()) {
-                    echo '<div class="class-item">';
-                    echo '<div><strong>Class:</strong> ' . htmlspecialchars($row['class_name']) . '</div>';
-                    echo '<div><strong>Description:</strong> ' . htmlspecialchars($row['description']) . '</div>';
-                    echo '<div><strong>Room:</strong> ' . htmlspecialchars($row['room']) . '</div>';
-                    echo '<div><strong>Day:</strong> ' . htmlspecialchars($row['timeslot_day']) . '</div>';
-                    echo '<div><strong>Time:</strong> ' . htmlspecialchars(date("h:i A", strtotime($row['timeslot_time']))) . '</div>';
-                    echo '<div><strong>Tutor:</strong> ' . htmlspecialchars($row['tutor_name'] ? $row['tutor_name'] : 'Not Assigned') . '</div>';
-                    echo '<div><strong>Status:</strong> ' . (htmlspecialchars($row['is_open']) ? 'Open' : 'Closed') . '</div>';
-                    
-                    echo '<div class="button-container">';
-                    echo '<a href="edit_class.php?class_id=' . htmlspecialchars($row['class_id']) . '" class="edit-button">EDIT</a>';
-                    echo '<form method="post" action="process_delete_class.php">';
-                    echo '<input type="hidden" name="class_id" value="' . htmlspecialchars($row['class_id']) . '">';
-                    echo '<button type="submit" class="delete-button" onclick="return confirm(\'Are you sure you want to delete this class?\');">DELETE</button>';
-                    echo '</form>';
-                    echo '</div>';
-                    
-                    echo '</div>';
+            <table class="classes-table">
+                <thead>
+                    <tr>
+                        <th>Class</th>
+                        <th>Description</th>
+                        <th>Room</th>
+                        <th>Day</th>
+                        <th>Time</th>
+                        <th>Tutor</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                if ($result_classes && $result_classes->num_rows > 0) {
+                    while ($row = $result_classes->fetch_assoc()) {
+                        echo '<tr>';
+                        echo '<td>' . htmlspecialchars($row['class_name']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['description']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['room']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['timeslot_day']) . '</td>';
+                        echo '<td>' . htmlspecialchars(date("h:i A", strtotime($row['timeslot_time']))) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['tutor_name'] ? $row['tutor_name'] : 'Not Assigned') . '</td>';
+                        echo '<td><span class="status-badge ' . ($row['is_open'] ? 'status-open' : 'status-closed') . '">' . ($row['is_open'] ? 'Open' : 'Closed') . '</span></td>';
+                        echo '<td><div class="action-buttons">';
+                        echo '<a href="edit_class.php?class_id=' . htmlspecialchars($row['class_id']) . '" class="edit-button">EDIT</a>';
+                        echo '<form method="post" action="process_delete_class.php" style="display:inline;">';
+                        echo '<input type="hidden" name="class_id" value="' . htmlspecialchars($row['class_id']) . '">';
+                        echo '<button type="submit" class="delete-button" onclick="return confirm(\'Are you sure you want to delete this class?\');">DELETE</button>';
+                        echo '</form>';
+                        echo '</div></td>';
+                        echo '</tr>';
+                    }
+                } else {
+                    echo '<tr><td colspan="8" style="text-align:center;">No classes available.</td></tr>';
                 }
-            } else {
-                echo '<p>No classes available.</p>';
-            }
-            ?>
+                ?>
+                </tbody>
+            </table>
         </div>
+
+        <?php if ($total_pages > 1): ?>
+        <div class="pagination">
+            <?php if ($page > 1): ?>
+                <a href="?page=<?php echo $page - 1; ?>" class="pagination-button">Previous</a>
+            <?php endif; ?>
+            
+            <?php
+            $start_page = max(1, $page - 2);
+            $end_page = min($total_pages, $page + 2);
+            
+            for ($i = $start_page; $i <= $end_page; $i++):
+            ?>
+                <a href="?page=<?php echo $i; ?>" class="pagination-button <?php echo $i == $page ? 'active' : ''; ?>">
+                    <?php echo $i; ?>
+                </a>
+            <?php endfor; ?>
+            
+            <?php if ($page < $total_pages): ?>
+                <a href="?page=<?php echo $page + 1; ?>" class="pagination-button">Next</a>
+            <?php endif; ?>
+        </div>
+        <?php endif; ?>
     </div>
 
     <footer>

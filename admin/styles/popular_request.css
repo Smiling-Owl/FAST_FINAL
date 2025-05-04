@@ -180,36 +180,43 @@ footer {
     width: 100%;
     max-width: 100%;
     margin-bottom: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
     background-color: #fff;
-    margin-top: 20px;
+    margin-top: 0;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
     table-layout: auto;
 }
 
 th,
 td {
-    padding: 12px;
+    padding: 14px 12px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    min-width: 100px;
+    border-bottom: 1px solid #eee;
+    font-size: 1rem;
 }
 
 th {
     background-color: #7e461e;
     color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
 }
 
 tr:hover {
-    background-color: #f9f9f9;
+    background-color: #f1e6d6;
 }
 
 button {
@@ -290,5 +297,12 @@ footer {
 
     .navigation-bar li {
         margin: 5px; /* Add a little more margin on small screens */
+    }
+}
+
+@media (max-width: 600px) {
+    th, td {
+        font-size: 0.95rem;
+        padding: 10px 6px;
     }
 }

@@ -94,13 +94,15 @@ if ($result_applications === false) {
             if ($result_applications && $result_applications->num_rows > 0) {
                 while ($row = $result_applications->fetch_assoc()) {
                     echo '<div class="application-item">';
-                    echo '<h4>Application ID: ' . htmlspecialchars($row['application_id']) . '</h4>';
-                    echo '<p>Full Name: ' . htmlspecialchars($row['fullname']) . '</p>';
-                    echo '<p>Student ID: ' . htmlspecialchars($row['student_id']) . '</p>';
-                    echo '<p>Email: ' . htmlspecialchars($row['email']) . '</p>';
-                    echo '<p>Applied On: ' . htmlspecialchars($row['application_date']) . '</p>';
-                    echo '<p>Status: ' . htmlspecialchars($row['status']) . '</p>';
-                    echo '<p>Student Username: ' . htmlspecialchars($row['student_username']) . '</p>';
+                    echo '<div class="application-card-header">';
+                    echo '<span class="applicant-name">' . htmlspecialchars($row['fullname']) . '</span>';
+                    echo '<span class="status-badge ' . htmlspecialchars($row['status']) . '">' . ucfirst(htmlspecialchars($row['status'])) . '</span>';
+                    echo '</div>';
+                    echo '<div class="application-row"><span class="label">Application ID:</span><span class="value">' . htmlspecialchars($row['application_id']) . '</span></div>';
+                    echo '<div class="application-row"><span class="label">Student ID:</span><span class="value">' . htmlspecialchars($row['student_id']) . '</span></div>';
+                    echo '<div class="application-row"><span class="label">Email:</span><span class="value">' . htmlspecialchars($row['email']) . '</span></div>';
+                    echo '<div class="application-row"><span class="label">Applied On:</span><span class="value">' . htmlspecialchars($row['application_date']) . '</span></div>';
+                    echo '<div class="application-row"><span class="label">Student Username:</span><span class="value">' . htmlspecialchars($row['student_username']) . '</span></div>';
                     echo '<div class="action-buttons">';
                     echo '<button class="approve-button" onclick="processApplication(' . htmlspecialchars($row['application_id']) . ', \'approve\')">Approve</button>';
                     echo '<button class="reject-button" onclick="processApplication(' . htmlspecialchars($row['application_id']) . ', \'reject\')">Reject</button>';
