@@ -1,112 +1,108 @@
-/* tutor_dashboard.css */
+/*Font link for montserrat*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* Ensure the body has proper spacing for fixed navbar */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 90px; /* Account for navbar height (70px) + padding */
+}
+
+/* Container for dashboard content */
 .container {
-    max-width: 960px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 1400px; /* Increased from 1200px */
+    width: 90%; /* Added to make it take up more horizontal space */
+    margin: 30px auto;
+    padding: 30px; /* Increased from 20px */
+    background-color: #f8f1e4; /* Darker background than white */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    font-family: 'PT Sans', sans-serif;
+    flex: 1; /* Allow container to grow and push footer down */
 }
 
+/* Page title styling */
 h1 {
+    color: #7e461e;
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.5rem;
     text-align: center;
-    color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
+/* Class schedule cards */
 .class-schedule {
-    background-color: #fff;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+    background-color: rgba(195, 126, 70, 0.85); /* Darker than before */
+    padding: 25px; /* Increased from 20px */
+    border-radius: 10px;
+    margin-bottom: 25px; /* Increased from 20px */
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow */
+    color: #F4F4F4;
 }
 
+/* Class name styling */
 .class-schedule h3 {
-    color: #007bff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 8px;
 }
 
+/* Class details styling */
 .class-schedule p {
-    margin-bottom: 5px;
+    font-size: 1.1rem;
+    margin: 8px 0;
 }
 
-.class-schedule h4 {
-    margin-top: 15px;
-    color: #555;
+.class-schedule p strong {
+    font-weight: 700;
+    display: inline-block;
+    width: 60px;
 }
 
-.class-schedule ul {
-    list-style-type: disc;
-    padding-left: 20px;
-}
-
-.class-schedule ul li {
-    margin-bottom: 3px;
-    color: #777;
-}
-
-header .navigation-bar {
-    background-color: #003366; /* Darker blue, like Ateneo Blue */
-    overflow: hidden;
-    padding: 10px 0;
-    position: relative; /* Needed for absolute positioning of elements inside */
-}
-
-header .navigation-bar #navigation-container {
-    display: flex; /* Use flexbox for layout */
-    align-items: center; /* Vertically center items */
-    justify-content: space-between; /* Space out logo and nav items */
-    max-width: 1200px; /* Maximum width for the navigation bar */
-    margin: 0 auto; /* Center the navigation bar */
-    padding: 0 20px; /* Add some padding on the sides */
-}
-
-
-header .navigation-bar img {
-    height: 50px; /* Increased height for the logo */
-    margin-right: 20px; /* Add some margin to the right of the logo */
-}
-
-header .navigation-bar ul {
-    list-style: none;
-    display: flex; /* Use flexbox for horizontal menu */
-    margin: 0;
-    padding: 0;
-}
-
-header .navigation-bar ul li {
-    margin-left: 20px; /* Space between menu items */
-}
-
-header .navigation-bar ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 16px; /* Increased font size */
-    transition: color 0.3s ease; /* Smooth color transition */
-    padding: 8px 16px; /* Add padding to the links */
-    border-radius: 5px; /* Optional: Rounded corners for links */
-}
-
-header .navigation-bar ul li a:hover {
-    color: #FFD700; /* Gold on hover, more visible */
-    background-color: rgba(255, 215, 0, 0.1); /* Subtle background on hover */
-}
-
-
-footer {
-    background-color: #003366; /* Same dark blue as header */
-    color: white;
+/* Empty schedule message */
+.container > p {
     text-align: center;
-    padding: 10px;
-    margin-top: 20px; /* Add space above the footer */
-    border-top: 2px solid #FFD700; /* Gold border on top */
+    font-size: 1.2rem;
+    color: rgba(30, 28, 27, 0.923);
+    margin: 40px 0;
+    font-style: italic;
 }
 
-footer .footer-content {
+/* Footer styling */
+footer {
+    background-color: rgb(34, 31, 23);
+    color: #f4f4f4;
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-top: 30px;
+    font-family: 'PT Sans', sans-serif;
+    width: 100%;
+    position: relative; /* Ensure footer stays at the bottom */
+}
+
+.footer-content {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        margin: 15px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .class-schedule {
+        padding: 15px;
+    }
 }
