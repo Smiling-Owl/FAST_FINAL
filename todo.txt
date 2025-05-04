@@ -1,0 +1,11 @@
+index.php - log in now
+
+request.php - no bg and navbar
+
+tutor_app.php - no navbar
+
+search_classes.php - footer not in bottom, container overlapping with navbar, navbar wrong linking
+
+
+
+!!! RECHECK THE ICON FOR THE NAVBAR
