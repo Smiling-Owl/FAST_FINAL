@@ -116,12 +116,21 @@ $result_tutor_application = $conn->query($sql_tutor_application);
         </div>
     </div>
 
+    <div class="carousel-image">
+        <img src="../images/carousel_1.jpg" alt="Hero Image 1" class="carousel-slide">
+        <img src="../images/carousel_2.jpg" alt="Hero Image 2" class="carousel-slide">
+        <img src="../images/carousel_3.jpg" alt="Hero Image 3" class="carousel-slide">
+        <img src="../images/carousel_4.jpg" alt="Hero Image 4" class="carousel-slide">
+    </div>
+    <div class="carousel-overlay"></div>
+
     <footer>
         <div class="footer-content">
             <p>&copy; <?php echo date("Y"); ?> Foundation of Ateneo Student Tutors - Admin Area</p>
         </div>
     </footer>
 
+    <script src="../index.js"></script>
 </body>
 </html>
 
