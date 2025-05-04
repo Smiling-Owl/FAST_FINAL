@@ -81,7 +81,7 @@ if (!isset($_SESSION['username'])) {
 
     <section class="about_section" id="about">
         <h1 class="about-title"> ABOUT US </h1>
-        <img class="about-us" src="#" alt="About Us">
+        <img class="about-us" src="images/about-us.jpeg" alt="About Us">
         <p class="about-text">
             The Foundation of Ateneo Student Tutors is an organization that specializes in hosting and
             providing tutoring services from Ateneo students for Ateneo students. FAST upholds the priority
