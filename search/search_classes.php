@@ -147,7 +147,7 @@ if ($conn->connect_error) {
             <div id="navigation-container">
                 <img src="../images/FAST Logo Trans.png" alt="FAST Logo">
                 <ul>
-                    <li><a href="search_classes.php" aria-label="Search Classes">SEARCH CLASSES</a></li>
+                    <li><a href="../dashboard/dashboard.php" aria-label="Search Classes">STUDENT DASHBOARD</a></li>
                     <li><a href="../logout.php">LOG OUT</a></li>
                 </ul>
             </div>
