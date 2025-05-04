@@ -50,7 +50,7 @@
     <header>
         <div class="navigation-bar">
             <div id="navigation-container">
-                <img src="../Main-images/FAST logo white trans.png" alt="FAST Logo">
+                <img src="../images/FAST Logo Trans.png" alt="FAST Logo">
                 <ul>
                 <li><a href="admin_dashboard.php" aria-label="Admin Dashboard">ADMIN DASHBOARD</a></li>
                     <li><a href="popular_requests.php" aria-label="Popular Requests">POPULAR REQUESTS</a></li>
