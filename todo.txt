@@ -1,11 +1,15 @@
-index.php - log in now
+index.php - log in now //Mathew
 
-request.php - no bg and navbar
+request.php - no bg and navbar //
 
-tutor_app.php - no navbar
+tutor_app.php - no navbar //
 
-search_classes.php - footer not in bottom, container overlapping with navbar, navbar wrong linking
+search_classes.php - footer not in bottom, container overlapping with navbar, navbar wrong linking //nour
 
+
+ADMIN
+
+carousel 
 
 
 !!! RECHECK THE ICON FOR THE NAVBAR
