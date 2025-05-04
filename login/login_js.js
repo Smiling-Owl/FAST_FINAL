@@ -1,0 +1,22 @@
+
+// JavaScript to make the carousel work
+const images = document.querySelectorAll('.carousel-slide');  // Get all images in the carousel
+let currentIndex = 0; // Index of the current active image
+
+// Function to show the next image
+function showNextImage() {
+    // Hide current image
+    images[currentIndex].classList.remove('active');
+    
+    // Update the index (circular navigation)
+    currentIndex = (currentIndex + 1) % images.length;
+
+    // Show the next image
+    images[currentIndex].classList.add('active');
+}
+
+// Initially show the first image
+images[currentIndex].classList.add('active');
+
+// Change the image every 3 seconds
+setInterval(showNextImage, 5000);

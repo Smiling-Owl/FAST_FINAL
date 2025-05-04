@@ -1,0 +1,119 @@
+/* Global Styles */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif; /* Matches the application fonts */
+  overflow: hidden;
+  background-color: #f4f4f9; /* Light background to match your app */
+}
+
+/* Carousel Image Styles */
+.carousel-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  overflow: hidden;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+}
+
+.carousel-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(50, 25, 0, 0.45);
+  z-index: -1;
+}
+
+/* Form Wrapper */
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Form Container */
+.registration-container {
+  background-color: #FFF5E3; /* Light background to match */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  max-width: 420px; /* Consistent width with your app's forms */
+  border: 2px solid #7e461e; /* Border color matches the app theme */
+  z-index: 2;
+}
+
+.registration-container h2 {
+  text-align: center;
+  color: #7e461e; /* Matches the application color */
+  margin-bottom: 20px;
+  font-family: 'Oswald', sans-serif;
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* Labels */
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: rgba(30, 28, 27, 0.923);
+  font-family: 'PT Sans', sans-serif;
+}
+
+/* Input and Textarea */
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #895129; /* Same border color */
+  border-radius: 6px;
+  font-family: 'PT Sans', sans-serif;
+  box-sizing: border-box;
+  background-color: #fdf6ef; /* Matches the input background */
+}
+
+/* Submit Button */
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #7e461e; /* Matches the button color in the app */
+  color: #f4f4f4;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: 'Oswald', sans-serif;
+  transition: all 0.3s ease;
+}
+
+/* Submit Button Hover Effect */
+.submit-btn:hover {
+  background-color: #FFF5E3;
+  color: #7e461e;
+  border: 2px solid #7e461e;
+}

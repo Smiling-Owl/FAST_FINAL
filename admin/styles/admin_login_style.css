@@ -1,0 +1,123 @@
+/*Font link for montserrat*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Stop the unwanted scrolling */
+    font-family: "Montserrat", sans-serif; /* montserrat font */
+}
+
+/* Background Image Styling */
+.background-image {
+    background-size: cover;
+    background-position: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2; /* Behind everything else */
+}
+
+/* Carousel Styling */
+.carousel-image {
+    position: fixed; /* Covers entire screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Hide overflowing images */
+    z-index: -1; /* Behind the login form */
+    opacity: 0.9;
+}
+
+/* Initially hide all images */
+.carousel-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures images cover the container */
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+/* Show active image */
+.carousel-slide.active {
+    opacity: 1;
+}
+
+/* Center the Login Form */
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color:#7e461ec8;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    text-align: center;
+}
+
+/* Logo Styling */
+.logo img {
+    max-width: 80%;
+    margin-bottom: 15px;
+}
+
+/* Heading Styling */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Form Inputs */
+input[type="text"],
+input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+/* Submit Button */
+button {
+    background-color: #A0522D;
+    color: white;
+    padding: 12px 15px;
+    border: none;
+    margin-top: 5%;
+    border-radius: 15px;
+    cursor: pointer;
+    width: 80%;
+    font-size: 16px;
+    transition: background 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #8B4513;
+}
+
+/* Links Styling */
+.links {
+    margin-top: 15px;
+}
+
+.links a {
+    display: block;
+    color: #bba4a4;
+    text-decoration: none;
+    font-size: 14px;
+    margin-bottom: 5px;
+    transition: color 0.3s;
+}
+
+.links a:hover {
+    color: #F4F4F4;
+}

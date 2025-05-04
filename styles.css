@@ -1,0 +1,415 @@
+
+/*Font link for montserrat*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Reset and general styles for body */
+body {
+    ---nav-height: 100px;
+    padding-top:var(---nav-height); /* pushed down everything source:Dcode */
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #FFF5E3;
+}
+
+/* Navigation bar container */
+.navigation-bar {
+    background-color: #7e461e; /* Nav bg color */
+    width: 100%; /* Full width of the viewport */
+    position: fixed;  /* Fixed position at the top */
+    top: 0;
+    display: flex;  /* Enable Flexbox */
+    justify-content: space-between; /* Logo on left, menu on right */
+    align-items: center; /* Vertically center the content */
+    height: 70px; /* Set a fixed height for the navigation bar */
+    padding: 10px;  /* Add padding on the sides */
+    z-index: 10; /* Ensures the navbar stays above other content */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    transition: transform 0.5s;
+}
+
+.nav--hidden {
+    transform: translateY(calc(-1 * var(---nav-height))); /*Hide the nav after scroll*/
+}
+
+/* Logo image styles */
+.navigation-bar img {
+    width: auto;
+    height: 50px;
+}
+
+/* Styling the navigation list */
+#navigation-container {
+    display: flex; /* Use Flexbox for navigation container */
+    width: 100%; /* Full width of the parent */
+    justify-content: space-between; /* Spread the logo and menu items apart */
+    align-items: center; /* Vertically center items */
+    margin-right: 20px;
+}
+
+/* Styling the navigation list */
+.navigation-bar ul {
+    display: flex; /* Display list items horizontally */
+    padding: 0;
+    margin: 0;
+    list-style-type: none; /* Remove default list styling */
+}
+
+/* List item styles */
+.navigation-bar li {
+    text-align: center;
+    min-width: 130px;
+    border-radius: 5%;
+    background-color:#895129;
+    margin: 0 5px; /* Add horizontal spacing between menu items */
+}
+
+.navigation-bar li a {
+    transition: transform 0.5s;
+    color: #F4F4F4;
+    font-size: 15px;
+    font-family: 'Oswald';
+    text-decoration: none; /* Remove underline from links */
+    line-height: 70px; /* Vertically center text inside the link */
+    padding: 5px 15px; /* Padding for spacing inside links */
+    opacity: 0.6; /* Slightly transparent links */
+}
+
+.navigation-bar li a:hover {
+    opacity: 1; /* Full opacity on hover */
+    font-size: 18px;
+}
+
+.navigation-bar img{
+    height: 72px;
+    width: 72px;
+}
+
+/* Carousel Styling */
+.carousel-image {
+    position: relative;  /* Allows absolute positioning of images inside it */
+    width: 100%;         /* Full width of the container */
+    height: 100vh;       /* Full height of the viewport */
+    overflow: hidden;    /* Hide images that are not in view */
+    z-index: 1;          /* Ensure carousel is behind the navbar */
+    opacity: 0.9;
+}
+
+/* Initially hide all images */
+.carousel-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure images cover the container without distortion */
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+/* Show active image */
+.carousel-slide.active {
+    opacity: 1;
+}
+
+/* Hero text styling */
+.overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.hero-text {
+    font-family: "Montserrat", sans-serif; /* montserrat font */
+    position: absolute; /* Positioning text on top of the carousel images */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Fine-tune centering */
+    color:#f4f4f4;
+    text-align: center;
+    z-index: 2; /* Ensure text is above the carousel images */
+}
+
+.hero-text h1 {
+    margin-top: 20%;
+    font-size: 80px;
+    font-weight:750;
+    margin-bottom: 5px;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 1);
+    
+}
+
+.hero-text p {
+    margin-top: 5%;
+    font-size: 30px;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 1);
+}
+
+/*About section basic styling*/
+.about_section{
+    text-align: center;
+    margin-top: 30px;
+}
+
+.about-title{
+    font-size: 2.5rem;
+    color: rgba(30, 28, 27, 0.923);
+    font-family: 'Oswald';
+}
+
+.about-text{
+    color: rgba(30, 28, 27, 0.923);
+    font-size: 1.25rem;
+    padding: 1.5rem;
+    margin: 1.5rem;
+    font-family: 'PT Sans';
+}
+
+.about-us {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensure the image is in the background */
+}
+
+/* MV Section Styling */
+.MV_section {
+    position: relative;
+    width: 100%; /* Full width of the viewport */
+    height: 100vh; /* Full height of the viewport */
+    /* background-image: url('images/MV.jpg'); Hero image */
+    background-size: cover; /* Make sure the image covers the entire section */
+    background-position: center; /* Center the image */
+    color: #F4F4F4;
+    display: flex; /* Enable Flexbox */
+    justify-content: center; /* Horizontally center the content */
+    align-items: center; /* Vertically center the content */
+}
+
+/* Container to hold the mission and vision cards */
+.MV_container {
+    display: flex; /* Align cards horizontally */
+    justify-content: space-between; /* Space cards apart */
+    width: 80%; /* Adjust the container width */
+    max-width: 1200px; /* Optional: Set a max width for the container */
+}
+
+/* Card styling for both mission and vision */
+.card {
+    background-color: rgba(219, 144, 82, 0.795); /* Slightly dark background for readability */
+    padding: 30px;
+    border-radius: 10px;
+    width: 45%; /* Cards will take 45% of the container width */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+    margin: 0 20px; /* Add horizontal margin to space out the cards */
+
+}
+
+/* Styling for the Mission title */
+.M_title, .V_title {
+    font-family: "Montserrat", sans-serif; /* montserrat font */
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family: 'Oswald';
+}
+
+/* Styling for the Mission and Vision paragraphs */
+.card p {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    font-family: 'PT Sans';
+}
+
+/* Styling for the MV Section hero image */
+.mv_hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image fills the area without distortion */
+    z-index: -1; /* Ensure the image is in the background */
+}
+
+.services_section{
+    padding: 50px 0;
+    background-color: #895129;
+    text-align: center;
+}
+.services-header{
+    color:#eae6e6;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    font-family: 'Oswald';
+}
+.services_container{
+    display: flex; /* Align cards horizontally */
+    justify-content: space-around; /* Space cards evenly */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    max-width: 1200px;
+    margin: 0 auto; /* Center the container */
+}
+.services_card{
+    background-color: rgba(118, 93, 76, 0.843);
+    padding: 30px;
+    border-radius: 10px;
+    width: 30%; /* Cards will take 30% of the container width */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    margin: 20px 0; /* Add vertical margin to space out the cards */
+}
+.service-title{
+    color:#eae6e6;
+    font-size: 2rem;
+    margin-bottom: 15px;
+    font-family: 'Oswald';
+}
+.service-description{
+    color:#eae6e6;
+    font-size: 1rem;
+    line-height: 1.6;
+    font-family: 'PT Sans';
+}
+
+
+.offi_section{
+    padding: 50px 0;
+    background-color: #5e503f;
+    text-align: center;
+}
+.offi-header{
+    color:#eae6e6;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    font-family: 'Oswald';
+}
+.offi_container{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.offi_card{
+    padding: 20px;
+    border-radius: 10px;
+    width: 18%;
+    margin: 20px 0;
+    text-align: center;
+}
+.offi_image{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+.offi-title{
+    color:#f4f4f4;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-family: 'Oswald';
+}
+.offi-description{
+    color:#f4f4f4;
+    font-size: 1rem;
+    line-height: 1.4;
+    font-family: 'PT Sans';
+}
+
+.footer_section {
+    height: auto; /* Allow footer to adjust height based on content */
+    background-color: rgb(34, 31, 23);
+    color: #f4f4f4;
+    text-align: center;
+    padding: 2rem 0; /* Add padding for spacing */
+    font-family: 'PT Sans';
+}
+
+.footer-content {
+    max-width: 1200px; /* Limit the width for better readability */
+    margin: 0 auto; /* Center the content */
+    padding: 0 1rem; /* Add some padding */
+}
+
+.footer_title {
+    font-family: "Montserrat", sans-serif; /* montserrat font */
+    margin: 0.5rem 0; /* Space between titles */
+    font-size: 1.5rem; /* Adjust font size */
+
+}
+
+.footer_contact {
+    margin: 1rem 0; /* Space above and below contact info */
+}
+
+.footer_contact a {
+    color: white;
+    text-decoration: none; /* Remove underline */
+}
+
+.footer_copy {
+    margin-top: 1rem; /* Space above copyright */
+    font-size: 0.9rem; /* Smaller font size */
+}
+
+
+.dropdown .DropApplication {
+    min-width: 100px;
+    font-size: 15px;
+    text-align: center;
+    border: none;
+    background-color: inherit; /* same color as others */
+}
+
+.Dropdown_Application {
+    display: none;
+    position: absolute;
+    min-width: 135px;
+    box-shadow: 5%;
+    border-radius: 5%;
+    z-index: 1;
+}
+  
+.Dropdown_Application a {
+    background-color: #895129;
+    float: none;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    border-radius: 5%;
+}
+  
+.dropdown:hover .Dropdown_Application {
+    background-color: #7e461e;
+    display: block;
+    box-shadow: 10%;
+}
+
+.report_section {
+    padding: 2rem;
+    background-color: #f9f9f9;
+    margin-top: 2rem;
+    text-align: center;
+}
+.report-form {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+.report-form input, .report-form textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+.report-form button {
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    background-color: #002147;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}

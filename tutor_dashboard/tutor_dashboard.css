@@ -1,0 +1,112 @@
+/* tutor_dashboard.css */
+.container {
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.class-schedule {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.class-schedule h3 {
+    color: #007bff;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.class-schedule p {
+    margin-bottom: 5px;
+}
+
+.class-schedule h4 {
+    margin-top: 15px;
+    color: #555;
+}
+
+.class-schedule ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.class-schedule ul li {
+    margin-bottom: 3px;
+    color: #777;
+}
+
+header .navigation-bar {
+    background-color: #003366; /* Darker blue, like Ateneo Blue */
+    overflow: hidden;
+    padding: 10px 0;
+    position: relative; /* Needed for absolute positioning of elements inside */
+}
+
+header .navigation-bar #navigation-container {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Vertically center items */
+    justify-content: space-between; /* Space out logo and nav items */
+    max-width: 1200px; /* Maximum width for the navigation bar */
+    margin: 0 auto; /* Center the navigation bar */
+    padding: 0 20px; /* Add some padding on the sides */
+}
+
+
+header .navigation-bar img {
+    height: 50px; /* Increased height for the logo */
+    margin-right: 20px; /* Add some margin to the right of the logo */
+}
+
+header .navigation-bar ul {
+    list-style: none;
+    display: flex; /* Use flexbox for horizontal menu */
+    margin: 0;
+    padding: 0;
+}
+
+header .navigation-bar ul li {
+    margin-left: 20px; /* Space between menu items */
+}
+
+header .navigation-bar ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px; /* Increased font size */
+    transition: color 0.3s ease; /* Smooth color transition */
+    padding: 8px 16px; /* Add padding to the links */
+    border-radius: 5px; /* Optional: Rounded corners for links */
+}
+
+header .navigation-bar ul li a:hover {
+    color: #FFD700; /* Gold on hover, more visible */
+    background-color: rgba(255, 215, 0, 0.1); /* Subtle background on hover */
+}
+
+
+footer {
+    background-color: #003366; /* Same dark blue as header */
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px; /* Add space above the footer */
+    border-top: 2px solid #FFD700; /* Gold border on top */
+}
+
+footer .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Foundation of Ateneo Student Tutors</title>
+  <link rel="icon" type="image/x-icon" href="../images/FAST logo white trans.png">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="request_style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $conn = new mysqli("localhost", "root", "", "fastdb");
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("<p style='color:red;'>Connection failed: " . $conn->connect_error . "</p>");
+    }
+
+    // Sanitize and validate inputs
+    $course = mysqli_real_escape_string($conn, trim($_POST['course']));
+    $subject = mysqli_real_escape_string($conn, trim($_POST['subject']));
+    $topic = mysqli_real_escape_string($conn, trim($_POST['topic']));
+    $freetime = mysqli_real_escape_string($conn, trim($_POST['freetime']));
+    $reason = mysqli_real_escape_string($conn, trim($_POST['reason']));
+
+    // Validate inputs
+    if (empty($course) || empty($subject) || empty($topic) || empty($freetime) || empty($reason)) {
+        echo "<p style='color:red; text-align:center;'>All fields are required. Please fill them out.</p>";
+    } else {
+        // Prepare and bind the SQL statement
+        $stmt = $conn->prepare("INSERT INTO tutoring_requests (course, subject, topic, freetime, reason) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $course, $subject, $topic, $freetime, $reason);
+
+        // Execute the query and give feedback
+        if ($stmt->execute()) {
+            echo "<p style='color:green; text-align:center;'>Request submitted successfully!</p>";
+        } else {
+            echo "<p style='color:red; text-align:center;'>Error: " . $stmt->error . "</p>";
+        }
+
+        $stmt->close();
+    }
+
+    // Close the connection
+    $conn->close();
+}
+?>
+
+<div class="request-form">
+  <div class="form-wrapper">
+    <div class="registration-container">
+      <h2>TUTORING REQUEST FORM</h2>
+      <form method="POST" action="">
+
+        <div class="form-group">
+          <label for="course">Course</label><br>
+          <input type="text" id="course" name="course" required><br>
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Subject</label><br>
+          <input type="text" id="subject" name="subject" required><br>
+        </div>
+
+        <div class="form-group">
+          <label for="topic">Topic</label><br>
+          <input type="text" id="topic" name="topic" required><br>
+        </div>
+
+        <div class="form-group">
+          <label for="freetime">Schedule Tutoring Time</label><br>
+          <input type="text" id="freetime" name="freetime" required><br>
+        </div>
+
+        <div class="form-group">
+          <label for="reason">What would you like help with?</label><br>
+          <textarea id="reason" name="reason" rows="4" required></textarea><br>
+        </div>
+
+        <button type="submit" class="submit-btn">Submit</button><br>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="carousel-image">
+  <img src="../images/carousel_1.jpg" alt="Hero Image 1" class="carousel-slide">
+  <img src="../images/carousel_2.jpg" alt="Hero Image 2" class="carousel-slide">
+  <img src="../images/carousel_3.jpg" alt="Hero Image 3" class="carousel-slide">
+  <img src="../images/carousel_4.jpg" alt="Hero Image 4" class="carousel-slide">
+</div>
+<div class="carousel-overlay"></div>
+
+<script src="../index.js"></script>
+
+</body>
+</html>
