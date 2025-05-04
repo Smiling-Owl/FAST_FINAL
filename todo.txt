@@ -1,6 +1,6 @@
 index.php - log in now //Mathew
 
-request.php - no bg and navbar //
+request.php - no bg and navbar //Karl
 
 tutor_app.php - no navbar //
 
@@ -8,8 +8,8 @@ search_classes.php - footer not in bottom, container overlapping with navbar, na
 
 
 ADMIN
-
 carousel 
+manage student application page - scuffed navbar and display maybe
 
 
-!!! RECHECK THE ICON FOR THE NAVBAR
+!!! RECHECK THE ICON OF HE NAVBAR and the page itself
